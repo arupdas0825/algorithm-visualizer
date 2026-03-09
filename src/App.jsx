@@ -12,8 +12,7 @@ import DataStructuresPage from './components/DataStructuresPage';
 import ComparisonPage from './components/ComparisonPage';
 import LearningPage from './components/LearningPage';
 import DocsPage from './components/DocsPage';
-import { bubbleSort, mergeSort, quickSort } from './algorithms/sorting';
-import { bfs, dfs, dijkstra } from './algorithms/pathfinding';
+// Algorithms are now computed on the Flask Python backend
 import './App.css';
 
 const GRID_ROWS = 20, GRID_COLS = 30;
@@ -26,8 +25,7 @@ function generateEmptyGrid() {
 }
 function speedToMs(speed) { return Math.max(5, 500 - (speed - 1) * (495 / 99)); }
 
-const SORT_FNS = { bubble: bubbleSort, merge: mergeSort, quick: quickSort };
-const PATH_FNS = { bfs, dfs, dijkstra };
+// Handlers map directly to Python backend API endpoints
 
 export default function App() {
   /* ── Navigation ─────────────────────────────── */
@@ -92,12 +90,19 @@ export default function App() {
     timerRef.current = setTimeout(tick, speedToMs(speedRef.current));
   }, [renderSortStep]);
 
-  const computeAndPlay = useCallback((sourceArr) => {
-    const fn = SORT_FNS[algorithm]; if (!fn) return;
+  const computeAndPlay = useCallback(async (sourceArr) => {
     t0Ref.current = performance.now(); compRef.current = 0; swapRef.current = 0;
-    stepsRef.current = fn(sourceArr); indexRef.current = 0;
-    setStepLabel(`Step 0 / ${stepsRef.current.length}`);
-    playingRef.current = true; setStatusText('Playing…'); tick();
+    try {
+      setStatusText('Computing on Python Backend...');
+      const res = await fetch('/api/sorting/run', { method: 'POST', body: JSON.stringify({ algorithm, array: sourceArr }) });
+      const data = await res.json();
+      stepsRef.current = data.steps; indexRef.current = 0;
+      setStepLabel(`Step 0 / ${stepsRef.current.length}`);
+      playingRef.current = true; setStatusText('Playing…'); tick();
+    } catch (err) {
+      console.error(err);
+      setStatusText('Error computing. Is Flask running?');
+    }
   }, [algorithm, tick]);
 
   const handleGenerate = useCallback(() => {
@@ -106,30 +111,47 @@ export default function App() {
     else { runPathfinding(); }
   }, [vizMode, arraySize, stopPlayback]);
 
-  const runPathfinding = useCallback(() => {
+  const runPathfinding = useCallback(async () => {
     stopPlayback(); setVisitedCells(new Set()); setPathCells(new Set());
-    const fn = PATH_FNS[algorithm]; if (!fn) return;
-    t0Ref.current = performance.now(); const result = fn(grid, start, end); pfDataRef.current = result; pfIndexRef.current = 0;
-    const elapsed = ((performance.now() - t0Ref.current)).toFixed(2); const total = result.visitedOrder.length + result.path.length;
-    setStats(s => ({ ...s, gridSize: `${GRID_ROWS}×${GRID_COLS}`, nodesVisited: result.visitedOrder.length, pathLength: result.path.length, time: elapsed }));
-    setStepLabel(`Step 0 / ${total}`); setStatusText(result.found ? 'Path found — press Play' : 'No path — press Play to see exploration');
+    t0Ref.current = performance.now();
+    try {
+      setStatusText('Computing on Python Backend...');
+      const res = await fetch('/api/pathfinding/run', { method: 'POST', body: JSON.stringify({ algorithm, grid, start, end }) });
+      const result = await res.json();
+      pfDataRef.current = result; pfIndexRef.current = 0;
+      const elapsed = ((performance.now() - t0Ref.current)).toFixed(2); const total = result.visitedOrder.length + result.path.length;
+      setStats(s => ({ ...s, gridSize: `${GRID_ROWS}×${GRID_COLS}`, nodesVisited: result.visitedOrder.length, pathLength: result.path.length, time: elapsed }));
+      setStepLabel(`Step 0 / ${total}`); setStatusText(result.found ? 'Path found — press Play' : 'No path — press Play to see exploration');
+    } catch (err) {
+      console.error(err);
+      setStatusText('Error computing. Is Flask running?');
+    }
   }, [algorithm, grid, start, end, stopPlayback]);
 
-  const handlePlay = useCallback(() => {
+  const handlePlay = useCallback(async () => {
     if (playingRef.current) return;
-    if (vizMode === 'sort') { if (stepsRef.current.length === 0) { computeAndPlay(arr); return; } playingRef.current = true; setStatusText('Playing…'); tick(); }
-    else { if (pfDataRef.current.visitedOrder.length === 0) { runPathfinding(); } playingRef.current = true; setStatusText('Playing…'); setTimeout(tick, 50); }
+    if (vizMode === 'sort') { if (stepsRef.current.length === 0) { await computeAndPlay(arr); return; } playingRef.current = true; setStatusText('Playing…'); tick(); }
+    else { if (pfDataRef.current.visitedOrder.length === 0) { await runPathfinding(); } playingRef.current = true; setStatusText('Playing…'); setTimeout(tick, 50); }
   }, [vizMode, arr, computeAndPlay, tick, runPathfinding]);
 
   const handlePause = useCallback(() => { stopPlayback(); setStatusText('Paused'); }, [stopPlayback]);
 
-  const handleStep = useCallback(() => {
+  const handleStep = useCallback(async () => {
     stopPlayback();
     if (vizMode === 'sort') {
-      if (stepsRef.current.length === 0) { const fn = SORT_FNS[algorithm]; if (!fn) return; t0Ref.current = performance.now(); compRef.current = 0; swapRef.current = 0; stepsRef.current = fn(arr); indexRef.current = 0; setStepLabel(`Step 0 / ${stepsRef.current.length}`); }
-      if (indexRef.current < stepsRef.current.length) { renderSortStep(indexRef.current); indexRef.current++; }
+      if (stepsRef.current.length === 0) {
+        try {
+          setStatusText('Computing on Python Backend...');
+          const res = await fetch('/api/sorting/run', { method: 'POST', body: JSON.stringify({ algorithm, array: arr }) });
+          const data = await res.json();
+          t0Ref.current = performance.now(); compRef.current = 0; swapRef.current = 0; stepsRef.current = data.steps; indexRef.current = 0; setStepLabel(`Step 0 / ${stepsRef.current.length}`);
+          if (indexRef.current < stepsRef.current.length) { renderSortStep(indexRef.current); indexRef.current++; }
+        } catch (err) { setStatusText('Error computing. Is Flask running?'); }
+      } else {
+        if (indexRef.current < stepsRef.current.length) { renderSortStep(indexRef.current); indexRef.current++; }
+      }
     } else {
-      if (pfDataRef.current.visitedOrder.length === 0) { runPathfinding(); return; }
+      if (pfDataRef.current.visitedOrder.length === 0) { await runPathfinding(); return; }
       const { visitedOrder, path } = pfDataRef.current; const total = visitedOrder.length + path.length;
       if (pfIndexRef.current < total) { if (pfIndexRef.current < visitedOrder.length) { const [r, c] = visitedOrder[pfIndexRef.current]; setVisitedCells(prev => new Set(prev).add(`${r},${c}`)); } else { const pi = pfIndexRef.current - visitedOrder.length; const [r, c] = path[pi]; setPathCells(prev => new Set(prev).add(`${r},${c}`)); } pfIndexRef.current++; setStepLabel(`Step ${pfIndexRef.current} / ${total}`); }
     }
