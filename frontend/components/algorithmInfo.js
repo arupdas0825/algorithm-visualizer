@@ -28,6 +28,14 @@ const AlgorithmInfo = (() => {
             worst: "O(n²)",
             space: "O(log n)",
         },
+       selection: {
+            name: "Selection Sort",
+            desc: "Selection Sort repeatedly finds the minimum element from the unsorted part and places it at the beginning.",
+            best: "O(n²)",
+            avg: "O(n²)",
+            worst: "O(n²)",
+            space: "O(1)",
+        },
         bfs: {
             name: "Breadth-First Search",
             desc: "Explores all neighbor nodes at the current depth before moving to the next depth level. Guarantees the shortest path on unweighted grids.",
