@@ -99,7 +99,7 @@ export default function HomePage({ onLaunch }) {
                     <div className="feature-card">
                         <span className="feature-icon">📊</span>
                         <h3>Sorting Algorithms</h3>
-                        <p>Bubble Sort, Merge Sort, Quick Sort with step-by-step animation and color-coded comparisons.</p>
+                        <p>Bubble Sort, Merge Sort, Quick Sort,Selection Sort with step-by-step animation and color-coded comparisons.</p>
                     </div>
                     <div className="feature-card">
                         <span className="feature-icon">🗺️</span>
@@ -123,7 +123,7 @@ export default function HomePage({ onLaunch }) {
             <section className="home-algorithms" id="algorithms">
                 <h2 className="section-heading">Supported Algorithms</h2>
                 <div className="algo-pills">
-                    {['Bubble Sort', 'Merge Sort', 'Quick Sort', 'BFS', 'DFS', "Dijkstra's"].map((a) => (
+                    {['Bubble Sort', 'Merge Sort', 'Quick Sort','Selection Sort', 'BFS', 'DFS', "Dijkstra's"].map((a) => (
                         <span className="algo-pill" key={a}>{a}</span>
                     ))}
                 </div>
