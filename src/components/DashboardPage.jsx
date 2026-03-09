@@ -5,7 +5,7 @@ import '../pages.css';
  */
 export default function DashboardPage({ onNavigate }) {
     const quickCards = [
-        { key: 'sorting', icon: '📊', title: 'Sorting Visualizer', desc: '3 algorithms', color: '#6c63ff', stat: 'Bubble, Merge, Quick' },
+        { key: 'sorting', icon: '📊', title: 'Sorting Visualizer', desc: '4 algorithms', color: '#6c63ff', stat: 'Bubble, Merge, Quick,Selection' },
         { key: 'graph', icon: '🗺️', title: 'Graph Visualizer', desc: '3 algorithms', color: '#2dd4a8', stat: 'BFS, DFS, Dijkstra' },
         { key: 'datastructs', icon: '🗃️', title: 'Data Structures', desc: '6 structures', color: '#fbbf24', stat: 'Stack, Queue, Tree…' },
         { key: 'comparison', icon: '⚖️', title: 'Algorithm Comparison', desc: 'Side-by-side', color: '#f472b6', stat: 'Compare performance' },
