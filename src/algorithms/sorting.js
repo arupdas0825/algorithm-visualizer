@@ -88,19 +88,25 @@ export function quickSort(arr) {
     return steps;
 }
 /*selection sort*/
+let input = prompt("Enter numbers separated by space");
+
+// convert string input to array
+let arr = input.split(" ").map(Number);
+
 function selectionSort(arr) {
     let n = arr.length;
 
     for (let i = 0; i < n - 1; i++) {
+
         let minIndex = i;
 
         for (let j = i + 1; j < n; j++) {
+
             if (arr[j] < arr[minIndex]) {
                 minIndex = j;
             }
         }
-
-        // swap
+        
         let temp = arr[i];
         arr[i] = arr[minIndex];
         arr[minIndex] = temp;
@@ -108,6 +114,7 @@ function selectionSort(arr) {
 
     return arr;
 }
+let sortedArray = selectionSort(arr);
 
-let numbers = [64, 25, 12, 22, 11];
-console.log(selectionSort(numbers));
+console.log("Sorted Array:", sortedArray);
+alert("Sorted Array: " + sortedArray);
