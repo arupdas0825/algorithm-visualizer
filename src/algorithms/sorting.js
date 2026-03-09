@@ -87,3 +87,27 @@ export function quickSort(arr) {
     steps.push({ array: [...arr], comparing: [], swapped: false, sortedIndices: [...Array(arr.length).keys()], pivot: -1 });
     return steps;
 }
+/*selection sort*/
+function selectionSort(arr) {
+    let n = arr.length;
+
+    for (let i = 0; i < n - 1; i++) {
+        let minIndex = i;
+
+        for (let j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        // swap
+        let temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+
+    return arr;
+}
+
+let numbers = [64, 25, 12, 22, 11];
+console.log(selectionSort(numbers));
