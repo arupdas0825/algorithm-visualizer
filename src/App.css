@@ -53,7 +53,6 @@ body,
   height: 100%;
   background: var(--bg-body);
   color: var(--text);
-  overflow: hidden;
 }
 
 /* ── App Shell ───────────────────────────────────────────── */
