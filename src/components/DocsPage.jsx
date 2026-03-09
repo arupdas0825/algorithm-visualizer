@@ -89,6 +89,29 @@ npm run dev`}</code></pre>
 }`}</code></pre>
                             </div>
                         </div>
+                        <div className="docs-algo-card">
+    <h3>Selection Sort</h3>
+    <p>Selects the smallest element from the unsorted part of the array and swaps it with the current position.</p>
+    <div className="docs-code">
+        <div className="code-header">JavaScript</div>
+        <pre><code>{`function selectionSort(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    let minIndex = i;
+
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] < arr[minIndex]) {
+        minIndex = j;
+      }
+    }
+
+    if (minIndex !== i) {
+      [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+    }
+  }
+  return arr;
+}`}</code></pre>
+    </div>
+</div>
                     </section>
 
                     <section className="docs-section" id="pathfinding">
