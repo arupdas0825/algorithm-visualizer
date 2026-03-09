@@ -3,6 +3,7 @@ from core.engine import benchmark_sort, benchmark_pathfinding
 from algorithms.bubble_sort import bubble_sort
 from algorithms.merge_sort import merge_sort
 from algorithms.quick_sort import quick_sort
+from algorithms.selection_sort import selection_sort
 from pathfinding.bfs import bfs
 from pathfinding.dfs import dfs
 from pathfinding.dijkstra import dijkstra
@@ -22,6 +23,7 @@ def compare_sorts():
             "bubble": benchmark_sort(bubble_sort, arr),
             "merge": benchmark_sort(merge_sort, arr),
             "quick": benchmark_sort(quick_sort, arr),
+            "selection": benchmark_sort(selection_sort, arr),
         }
         
     return jsonify({"results": results})
