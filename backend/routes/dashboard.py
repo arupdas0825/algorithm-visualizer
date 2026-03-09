@@ -8,7 +8,7 @@ def get_stats():
     return jsonify({
         "algorithms_run": 1420,
         "active_users": 15,
-        "top_algorithm": "Quick Sort",
+        "top_algorithm": "Merge Sort",
         "system_health": "99.9% Uptime",
         "recent_activity": [
             {"user": "System", "action": "Server started", "time": "Just now"},
