@@ -5,6 +5,7 @@ const ALGORITHMS = [
     { name: 'Bubble Sort', type: 'sort', best: 'O(n)', avg: 'O(n²)', worst: 'O(n²)', space: 'O(1)', stable: true, inPlace: true },
     { name: 'Merge Sort', type: 'sort', best: 'O(n log n)', avg: 'O(n log n)', worst: 'O(n log n)', space: 'O(n)', stable: true, inPlace: false },
     { name: 'Quick Sort', type: 'sort', best: 'O(n log n)', avg: 'O(n log n)', worst: 'O(n²)', space: 'O(log n)', stable: false, inPlace: true },
+    { name: 'Selection Sort', type: 'sort', best: 'O(n²)', avg: 'O(n²)', worst: 'O(n²)', space: 'O(1)', stable: false, inPlace: true },
     { name: 'BFS', type: 'path', best: 'O(V+E)', avg: 'O(V+E)', worst: 'O(V+E)', space: 'O(V)', stable: false, inPlace: false },
     { name: 'DFS', type: 'path', best: 'O(V+E)', avg: 'O(V+E)', worst: 'O(V+E)', space: 'O(V)', stable: false, inPlace: false },
     { name: "Dijkstra's", type: 'path', best: 'O(V+E log V)', avg: 'O(V+E log V)', worst: 'O(V²)', space: 'O(V)', stable: false, inPlace: false },
@@ -75,6 +76,10 @@ export default function ComparisonPage() {
                     <h3>🎯 Guaranteed Performance</h3>
                     <p><strong>Merge Sort</strong> — O(n log n) in all cases. Ideal when stability matters.</p>
                 </div>
+                <div className="comp-insight-card">
+                    <h3>🧠 Simple but Slower</h3>
+                    <p><strong>Selection Sort</strong> — O(n²) in all cases. Simple algorithm but inefficient for large datasets.</p>
+               </div>
                 <div className="comp-insight-card">
                     <h3>🗺️ Shortest Path (Unweighted)</h3>
                     <p><strong>BFS</strong> — Guarantees shortest path on unweighted graphs. O(V+E) time.</p>
