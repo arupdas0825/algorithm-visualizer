@@ -1,104 +1,103 @@
-# ⚡ AlgoViz — Industry-Grade Algorithm Visualizer
+<div align="center">
+  <img src="https://grainy-gradients.vercel.app/noise.svg" width="100%" height="200px" style="object-fit: cover; opacity: 0.2; position: absolute; z-index: -1" />
+  
+  <br />
+  
+  <h1>🚀 ALGOMATE</h1>
+  <p><b>A Premium, Cinematic Algorithm Visualizer & Learning Platform</b></p>
+  
+  <p>
+    <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /></a>
+    <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" /></a>
+    <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" /></a>
+    <a href="https://www.framer.com/motion/"><img src="https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue" /></a>
+  </p>
 
-[![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.x-green.svg)](https://flask.palletsprojects.com/)
-[![React](https://img.shields.io/badge/React-19.x-61dafb.svg)](https://react.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  <p>
+    Watch code come to life. Algomate is a stunningly designed educational platform that bridges the gap between theoretical data structures and visual intuition using cinematic animations, glassmorphism UI, and highly optimized JavaScript generators.
+  </p>
+</div>
 
-An interactive, high-performance **Algorithm Visualizer** built with a **90% Python-driven architecture**. This project leverages a robust Flask backend to power complex algorithmic computations, benchmarking, and data generation, presented through a stunning, premium React interface.
+<br />
+
+## ✨ Features
+
+- **🎬 Cinematic Animations**: Powered by Framer Motion's physics-based engine, sorting arrays and graph traversals feel magnetic and alive.
+- **⚡ Zero Memory Bloat**: Algorithms are implemented using JS `function*` (Generators), ensuring `O(1)` memory overhead even for `O(N²)` complexity visualizations.
+- **🌌 Premium UI/UX**: Neural-network inspired backgrounds, cyberpunk glassmorphism, and Apple-level polish.
+- **🧠 Comprehensive Categories**:
+  - **Sorting**: Quick, Merge, Bubble, Selection, Insertion.
+  - **Pathfinding**: Dijkstra, BFS, DFS with interactive maze drawing.
+  - **Data Structures**: Interactive Stacks and Queues.
+  - **Dynamic Programming**: Knapsack visualization and Tabulation tables.
+  - **Trees**: BST / AVL structural representations.
+- **📱 Fully Responsive**: Flawless experience across Mobile, Tablet, and Ultrawide displays.
 
 ---
 
-## 🚀 Experience the Platform
+## 🛠️ Architecture Overview
 
-AlgoViz is more than just a visualizer; it's a comprehensive educational platform designed to make complex algorithms intuitive and engaging.
+The previous legacy Flask backend was completely ripped out in favor of a modern, lightning-fast **React SPA architecture**.
 
-### 🌟 Key Features (7 Core Sections)
-1. **📊 Dashboard**: Real-time system health, recent activity, and global usage statistics.
-2. **📉 Sorting Visualizer**: Watch Bubble Sort, Merge Sort, and Quick Sort in action with color-coded snapshots.
-3. **🗺️ Graph Visualizer**: Interactive grid for BFS, DFS, and Dijkstra. Draw walls and drag targets dynamically.
-4. **🌲 Data Structures**: Explore trees, graphs, and queues with Python-generated JSON structures.
-5. **⚖️ Comparison Engine**: Side-by-side performance benchmarking (Time & Memory) powered by Python's `tracemalloc`.
-6. **🎓 Learning Center**: Curated educational modules and difficulty-based algorithm tutorials.
-7. **📚 API Docs**: Interactive documentation for the project's powerful backend REST API.
-
----
-
-## 🛠️ Technology Stack & Architecture
-
-This project follows an **industry-standard decoupled architecture**, prioritizing backend logic in Python for performance and scalability.
-
-- **Backend**: Python 3.13+, Flask (Modular Blueprint Architecture).
-- **Core Engine**: Pure Python implementations of sorting and pathfinding.
-- **Frontend**: React 19, Vite, Vanilla CSS for premium aesthetics.
-- **Communication**: Asynchronous Fetch API with a local Vite proxy configuration.
-
-### Project Structure
 ```text
-algorithm-visualizer/
-├── backend/            # Python Flask Backend
-│   ├── algorithms/     # Logic for Sorts and Pathfinding
-│   ├── core/           # Benchmarking Core & Data Generators
-│   ├── routes/         # Modular Flask Blueprints (7 Sections)
-│   └── app.py          # Application Factory
-├── templates/          # HTML Templates
-├── src/                # React Frontend Modules
-└── frontend/           # Static Assets & CSS
+src/
+├── algorithms/     # Generator-based algorithm engines (zero memory overhead)
+├── components/     # Reusable Framer Motion UI components
+├── pages/          # App Routes (Sorting, Pathfinding, Trees, DP)
+├── hooks/          # Complex visualizer logic abstractors (useSortingVisualizer)
+└── styles/         # Tailwind CSS & global animations
 ```
 
 ---
 
-## ⚙️ Installation & Setup
+## 🚀 Installation & Setup
 
-Follow these steps to get the project running locally.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/arupdas0825/algorithm-visualizer.git
+   cd algorithm-visualizer
+   ```
 
-### 1. Prerequisities
-- Python 3.x
-- Node.js & npm
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### 2. Backend Setup
-```bash
-# Clone the repository
-git clone https://github.com/arupdas0825/algorithm-visualizer.git
-cd algorithm-visualizer
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install flask requests
-```
-
-### 3. Frontend Setup
-```bash
-# Install frontend packages
-npm install
-
-# Start the development server
-npm run dev
-```
-
-### 4. Running the App
-1. Start the Flask server: `python backend/app.py`
-2. Start the Vite server: `npm run dev`
-3. Visit `http://localhost:5173` in your browser.
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
 ---
 
-## 🎨 Visual Design
-The UI is inspired by modern development tools (like Reflect.app), featuring:
-- **Glassmorphism**: Translucent panels with blur effects.
-- **Dynamic Backgrounds**: Animated cosmic orbs and grid overlays.
-- **Micro-animations**: Smooth transitions and hover-state feedback for high-end UX.
+## 🗺️ Roadmap & Future Plans
+
+- [x] Refactor architecture from Flask/Vanilla to React/Vite.
+- [x] Implement Generator-based Animation Engine.
+- [x] Build futuristic Landing Page and Dashboard.
+- [x] Complete Pathfinding Grid & Node interactability.
+- [ ] **AI Tutor Integration**: Allow LLM-driven chat to explain specific algorithm steps.
+- [ ] **Multiplayer Race Mode**: Compete against friends to implement the fastest sorting algorithm.
+- [ ] **Theme Switcher**: AMOLED, Cyberpunk, and Neon specific color palettes.
 
 ---
 
 ## 🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request or open an issue.
 
-## 📄 License
-Distributed under the MIT License. See `LICENSE` for more information.
+We welcome contributions! To get started:
+1. Fork the repo.
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
 ---
-*Built with ❤️ for Algorithm Enthusiasts.*
+
+<div align="center">
+  <p>Built with ❤️ by passionate engineers.</p>
+</div>

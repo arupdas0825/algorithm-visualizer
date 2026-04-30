@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
 /**
- * Renders an array as animated vertical bars.
+ * Renders an array as animated vertical bars using Framer Motion.
  * @param {{ array: number[], highlights: object }} props
  */
 export default function ArrayVisualizer({ array, highlights = {} }) {
@@ -10,17 +11,31 @@ export default function ArrayVisualizer({ array, highlights = {} }) {
     const maxVal = Math.max(...array, 1);
 
     return (
-        <div className="array-container" ref={containerRef}>
+        <div className="flex items-end justify-center gap-[2px] w-full h-full p-4 rounded-xl" ref={containerRef}>
             {array.map((val, i) => {
-                let cls = 'bar';
-                if (sortedIndices.includes(i)) cls += ' sorted';
-                else if (pivot === i) cls += ' pivot';
-                else if (comparing.includes(i)) cls += swapped ? ' swapped' : ' comparing';
+                const isComparing = comparing.includes(i);
+                const isSwapped = isComparing && swapped;
+                const isSorted = sortedIndices.includes(i);
+                const isPivot = pivot === i;
+
+                // Determine colors based on state
+                let bgColor = 'bg-primary'; // Default indigo
+                if (isSorted) bgColor = 'bg-success'; // Green
+                else if (isPivot) bgColor = 'bg-warning'; // Amber
+                else if (isSwapped) bgColor = 'bg-error'; // Red
+                else if (isComparing) bgColor = 'bg-secondary'; // Purple
+
+                let glow = '';
+                if (isSorted) glow = 'shadow-[0_0_12px_rgba(34,197,94,0.6)]';
+                else if (isSwapped) glow = 'shadow-[0_0_15px_rgba(239,68,68,0.8)]';
+                else if (isComparing) glow = 'shadow-[0_0_12px_rgba(168,85,247,0.6)]';
 
                 return (
-                    <div
-                        key={i}
-                        className={cls}
+                    <motion.div
+                        key={i} // In a real app we'd use stable IDs for layout animations
+                        layout
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        className={`flex-1 rounded-t-sm ${bgColor} ${glow} opacity-90 hover:opacity-100 transition-opacity`}
                         style={{ height: `${(val / maxVal) * 100}%` }}
                     />
                 );
