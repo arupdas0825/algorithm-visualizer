@@ -1,20 +1,9 @@
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  X, 
-  Palette, 
-  Zap, 
-  Volume2, 
-  Activity, 
-  User, 
-  Brain, 
-  Settings,
-  Monitor,
-  MousePointer2,
-  Accessibility,
-  LogOut,
-  Trash2,
-  Download,
-  Check
+  X, Palette, Zap, Volume2, Activity, Brain, Settings, 
+  Monitor, MousePointer2, Accessibility, LogOut, Trash2, 
+  Download, Check, ChevronRight, Sparkles, Shield, Cpu
 } from 'lucide-react';
 import { useUserStore } from '../../store/useUserStore';
 import { useTheme } from '../../context/ThemeContext';
@@ -23,17 +12,27 @@ import clsx from 'clsx';
 export default function SettingsCenter({ isOpen, onClose }) {
   const { settings, setSettings, resetData } = useUserStore();
   const { theme, setTheme } = useTheme();
+  const [activeSection, setActiveSection] = useState('appearance');
+
+  // ESC key to close
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
 
   if (!isOpen) return null;
 
-  const categories = [
-    { id: 'appearance', label: 'Appearance', icon: Palette },
-    { id: 'ui', label: 'User Interface', icon: Monitor },
-    { id: 'sound', label: 'Audio Engine', icon: Volume2 },
-    { id: 'visualizer', label: 'Visualizer', icon: Activity },
-    { id: 'learning', label: 'Learning Hub', icon: Brain },
-    { id: 'accessibility', label: 'Accessibility', icon: Accessibility },
-    { id: 'account', label: 'Account Systems', icon: Settings },
+  const sections = [
+    { id: 'appearance', label: 'Appearance', icon: Palette, color: 'text-indigo-400' },
+    { id: 'motion', label: 'Motion & Dynamics', icon: Zap, color: 'text-yellow-400' },
+    { id: 'visualizer', label: 'Visualizer Engine', icon: Cpu, color: 'text-emerald-400' },
+    { id: 'audio', label: 'Sonic Environment', icon: Volume2, color: 'text-cyan-400' },
+    { id: 'accessibility', label: 'Accessibility', icon: Accessibility, color: 'text-purple-400' },
+    { id: 'ai', label: 'AI Features', icon: Sparkles, color: 'text-pink-400' },
+    { id: 'maintenance', label: 'Maintenance', icon: Shield, color: 'text-red-400' },
   ];
 
   const handleThemeChange = (newTheme) => {
@@ -43,244 +42,281 @@ export default function SettingsCenter({ isOpen, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 md:p-8">
+      <div className="fixed inset-0 z-[200] pointer-events-none">
+        {/* Backdrop - Only visible on mobile or as a slight overlay */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-auto md:bg-transparent md:backdrop-blur-none"
         />
-        
-        <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.95, opacity: 0 }}
-          className="relative w-full max-w-6xl h-[95vh] md:h-[85vh] bg-[#030712] border border-white/10 rounded-[1.5rem] md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)]"
-        >
-          {/* Sidebar */}
-          <div className="w-full md:w-80 border-b md:border-b-0 md:border-r border-white/10 bg-black p-6 md:p-8 flex flex-col shrink-0">
-            <div className="flex items-center justify-between mb-8 md:mb-12">
+
+        {/* Panel Container */}
+        <div className="absolute inset-0 flex items-start justify-center md:justify-end md:p-8 md:pt-24 pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className={clsx(
+              "pointer-events-auto w-full max-w-lg md:w-[480px] h-[100dvh] md:h-auto md:max-h-[85vh]",
+              "bg-[#030712]/95 border-l md:border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.8)]",
+              "md:rounded-[2.5rem] flex flex-col overflow-hidden relative"
+            )}
+          >
+            {/* Header */}
+            <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-[0_0_20px_rgba(99,102,241,0.5)]">
-                  <Settings size={20} />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary p-0.5 shadow-lg">
+                  <div className="w-full h-full rounded-[10px] bg-[#030712] flex items-center justify-center">
+                    <Settings size={20} className="text-white" />
+                  </div>
                 </div>
-                <h2 className="text-lg md:text-xl font-black text-white tracking-tight uppercase">Settings</h2>
+                <div>
+                  <h2 className="text-lg font-black text-white tracking-tight uppercase">Control Center</h2>
+                  <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em]">Neural System Config</span>
+                </div>
               </div>
-              <button onClick={onClose} className="md:hidden p-2 text-white/40 hover:text-white">
+              <button 
+                onClick={onClose}
+                className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all"
+              >
                 <X size={20} />
               </button>
             </div>
 
-            <nav className="flex md:flex-col gap-1 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 scrollbar-hide">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  className="whitespace-nowrap flex items-center gap-3 px-4 py-2.5 rounded-xl text-white/40 hover:bg-white/5 hover:text-white transition-all font-bold text-xs md:text-sm group text-left"
-                >
-                  <cat.icon size={18} className="group-hover:text-primary transition-colors" />
-                  {cat.label}
-                </button>
-              ))}
-            </nav>
-
-            <button 
-              onClick={() => {
-                if (window.confirm('Erase all system data? This cannot be undone.')) {
-                  resetData();
-                  window.location.reload();
-                }
-              }}
-              className="mt-auto hidden md:flex items-center gap-4 px-4 py-3.5 rounded-2xl text-red-500/60 hover:bg-red-500/10 hover:text-red-500 transition-all font-bold text-sm group"
-            >
-              <Trash2 size={20} />
-              Wipe Core Data
-            </button>
-          </div>
-
-          {/* Content Area */}
-          <div className="flex-1 overflow-y-auto bg-[#030712] scrollbar-thin">
-            <div className="p-12 max-w-3xl mx-auto space-y-16">
-              
-              {/* Appearance */}
-              <section className="space-y-8">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-2xl font-black text-white mb-1">Visual Architecture</h3>
-                    <p className="text-white/40 text-sm">Customize the system aesthetics and theme profiles.</p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {[
-                    { id: 'dark', label: 'Dark Mode', color: 'bg-[#0f172a]' },
-                    { id: 'amoled', label: 'AMOLED', color: 'bg-black' },
-                    { id: 'cyberpunk', label: 'Cyberpunk', color: 'bg-[#000b1e]' },
-                    { id: 'neon', label: 'Neon Glow', color: 'bg-[#0d0221]' },
-                    { id: 'light', label: 'Light Protocol', color: 'bg-white' },
-                  ].map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => handleThemeChange(t.id)}
-                      className={clsx(
-                        "p-6 rounded-3xl border-2 transition-all text-left relative overflow-hidden group",
-                        theme === t.id ? "border-primary bg-primary/10" : "border-white/5 bg-white/5 hover:border-white/10"
-                      )}
-                    >
-                      <div className={clsx("w-10 h-10 rounded-xl mb-4 shadow-xl", t.color)} />
-                      <span className="font-bold text-white text-sm">{t.label}</span>
-                      {theme === t.id && (
-                        <div className="absolute top-4 right-4 text-primary">
-                          <Check size={20} />
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </section>
-
-              {/* UI & Animation */}
-              <section className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-black text-white mb-1">Motion & Dynamics</h3>
-                  <p className="text-white/40 text-sm">Fine-tune the physics and intensity of the interface.</p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4">
-                  {[
-                    { label: 'Reduced Motion', desc: 'Minimizes parallax and spring animations.', key: 'reducedMotion' },
-                    { label: 'Compact Interface', desc: 'Optimizes information density for data mastery.', key: 'compactMode' },
-                    { label: 'Immersive Environment', desc: 'Hides non-essential UI during visualization.', key: 'immersiveMode' },
-                  ].map((item) => (
-                    <div key={item.key} className="flex items-center justify-between p-6 rounded-3xl bg-white/5 border border-white/5">
-                      <div>
-                        <h4 className="font-bold text-white mb-1">{item.label}</h4>
-                        <p className="text-xs text-white/40">{item.desc}</p>
-                      </div>
-                      <button 
-                        onClick={() => setSettings('ui', { [item.key]: !settings.ui[item.key] })}
-                        className={clsx(
-                          "w-14 h-8 rounded-full transition-all relative p-1",
-                          settings.ui[item.key] ? "bg-primary" : "bg-white/10"
-                        )}
-                      >
-                        <div className={clsx(
-                          "w-6 h-6 rounded-full bg-white shadow-lg transition-all",
-                          settings.ui[item.key] ? "translate-x-6" : "translate-x-0"
-                        )} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* Sound Engine */}
-              <section className="space-y-8">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-2xl font-black text-white mb-1">Sonic Environment</h3>
-                    <p className="text-white/40 text-sm">Manage the auditory feedback systems.</p>
-                  </div>
-                  <div className="flex items-center gap-2 text-white/40">
-                    <Volume2 size={20} />
-                    <span className="font-mono text-sm">{Math.round(settings.sound.volume * 100)}%</span>
-                  </div>
-                </div>
-
-                <div className="p-8 rounded-[2rem] bg-white/5 border border-white/5 space-y-8">
-                  <input 
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={settings.sound.volume}
-                    onChange={(e) => setSettings('sound', { volume: parseFloat(e.target.value) })}
-                    className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer accent-primary"
-                  />
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <button 
-                      onClick={() => setSettings('sound', { uiSounds: !settings.sound.uiSounds })}
-                      className={clsx("p-4 rounded-2xl border transition-all flex items-center justify-between", settings.sound.uiSounds ? "border-primary bg-primary/10 text-white" : "border-white/5 text-white/40")}
-                    >
-                      <span className="font-bold text-xs uppercase tracking-widest">UI Feedback</span>
-                      {settings.sound.uiSounds ? <Check size={16}/> : <div className="w-4 h-4 rounded-full border border-current opacity-20"/>}
-                    </button>
-                    <button 
-                      onClick={() => setSettings('sound', { algoSounds: !settings.sound.algoSounds })}
-                      className={clsx("p-4 rounded-2xl border transition-all flex items-center justify-between", settings.sound.algoSounds ? "border-primary bg-primary/10 text-white" : "border-white/5 text-white/40")}
-                    >
-                      <span className="font-bold text-xs uppercase tracking-widest">Algo Synth</span>
-                      {settings.sound.algoSounds ? <Check size={16}/> : <div className="w-4 h-4 rounded-full border border-current opacity-20"/>}
-                    </button>
-                  </div>
-                </div>
-              </section>
-
-              {/* Visualizer Parameters */}
-              <section className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-black text-white mb-1">Visualizer Engine</h3>
-                  <p className="text-white/40 text-sm">Control the physics and rendering of algorithm data.</p>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex justify-between text-xs font-black uppercase tracking-widest text-white/40 px-2">
-                      <span>Execution Speed</span>
-                      <span className="text-accent">{settings.visualizer.speed}x</span>
-                    </div>
-                    <input 
-                      type="range" min="0.1" max="5" step="0.1"
-                      value={settings.visualizer.speed}
-                      onChange={(e) => setSettings('visualizer', { speed: parseFloat(e.target.value) })}
-                      className="w-full h-1.5 bg-white/10 rounded-full appearance-none accent-accent"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex justify-between text-xs font-black uppercase tracking-widest text-white/40 px-2">
-                      <span>Node Scale</span>
-                      <span className="text-accent">{settings.visualizer.nodeSize}px</span>
-                    </div>
-                    <input 
-                      type="range" min="12" max="64" step="2"
-                      value={settings.visualizer.nodeSize}
-                      onChange={(e) => setSettings('visualizer', { nodeSize: parseInt(e.target.value) })}
-                      className="w-full h-1.5 bg-white/10 rounded-full appearance-none accent-accent"
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* Account Data */}
-              <section className="p-12 rounded-[3rem] bg-gradient-to-br from-white/5 to-transparent border border-white/10 text-center">
-                <h3 className="text-xl font-black text-white mb-2">System Maintenance</h3>
-                <p className="text-white/40 text-sm mb-8">Export your algorithmic journey or reset session parameters.</p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  <button className="px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold text-sm flex items-center gap-2 hover:bg-white/10 transition-all">
-                    <Download size={18} />
-                    Export Archive
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setSettings('learning', { autoSave: !settings.learning.autoSave });
-                    }}
+            {/* Sidebar / Navigation (Desktop) / Tabs (Mobile) */}
+            <div className="flex flex-col flex-1 min-h-0">
+              <nav className="flex md:flex-row overflow-x-auto scrollbar-hide border-b border-white/5 bg-black/20 p-2 gap-1 shrink-0">
+                {sections.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setActiveSection(s.id)}
                     className={clsx(
-                      "px-8 py-4 rounded-2xl border font-bold text-sm flex items-center gap-2 transition-all",
-                      settings.learning.autoSave ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" : "bg-white/5 border-white/10 text-white/40"
+                      "flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all whitespace-nowrap group shrink-0",
+                      activeSection === s.id ? "bg-white/10 text-white" : "text-white/30 hover:bg-white/5 hover:text-white"
                     )}
                   >
-                    <Check size={18} />
-                    Session Auto-Save: {settings.learning.autoSave ? 'ON' : 'OFF'}
+                    <s.icon size={16} className={clsx("transition-colors", activeSection === s.id ? s.color : "group-hover:text-white")} />
+                    <span className="text-xs font-bold uppercase tracking-widest">{s.label}</span>
                   </button>
+                ))}
+              </nav>
+
+              {/* Main Content Area */}
+              <div className="flex-1 overflow-y-auto p-8 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeSection}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="space-y-10"
+                  >
+                    {activeSection === 'appearance' && (
+                      <div className="space-y-8">
+                        <div>
+                          <h3 className="text-xl font-black text-white mb-1">Visual Architecture</h3>
+                          <p className="text-xs text-white/40">Select your preferred system aesthetic.</p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          {[
+                            { id: 'dark', label: 'Dark', color: 'bg-[#0f172a]' },
+                            { id: 'amoled', label: 'AMOLED', color: 'bg-black' },
+                            { id: 'cyberpunk', label: 'Cyber', color: 'bg-[#000b1e]' },
+                            { id: 'light', label: 'Light', color: 'bg-white' },
+                          ].map((t) => (
+                            <button
+                              key={t.id}
+                              onClick={() => handleThemeChange(t.id)}
+                              className={clsx(
+                                "p-4 rounded-2xl border-2 transition-all text-left relative group",
+                                theme === t.id ? "border-primary bg-primary/10" : "border-white/5 bg-white/5 hover:border-white/10"
+                              )}
+                            >
+                              <div className={clsx("w-8 h-8 rounded-lg mb-3 shadow-lg", t.color)} />
+                              <span className="font-bold text-white text-xs uppercase tracking-widest">{t.label}</span>
+                              {theme === t.id && <Check size={16} className="absolute top-4 right-4 text-primary" />}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {activeSection === 'motion' && (
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-xl font-black text-white mb-1">Physics & Dynamics</h3>
+                          <p className="text-xs text-white/40">Adjust the system's kinetic behavior.</p>
+                        </div>
+                        {[
+                          { label: 'Neural Fluidity', desc: 'Enable complex spring physics.', key: 'reducedMotion', inverted: true },
+                          { label: 'Kinetic Feedback', desc: 'Active hover & click states.', key: 'kineticFeedback', default: true },
+                          { label: 'Parallax Depth', desc: 'Enable multi-layered UI motion.', key: 'parallax', default: true },
+                        ].map((item) => (
+                          <div key={item.label} className="flex items-center justify-between p-5 rounded-2xl bg-white/[0.02] border border-white/5">
+                            <div>
+                              <h4 className="font-bold text-white text-sm">{item.label}</h4>
+                              <p className="text-[10px] text-white/30 uppercase tracking-tight">{item.desc}</p>
+                            </div>
+                            <button 
+                              onClick={() => setSettings('ui', { [item.key]: !settings.ui[item.key] })}
+                              className={clsx(
+                                "w-12 h-6 rounded-full transition-all relative p-1",
+                                settings.ui[item.key] ? "bg-primary" : "bg-white/10"
+                              )}
+                            >
+                              <div className={clsx(
+                                "w-4 h-4 rounded-full bg-white shadow-lg transition-all",
+                                settings.ui[item.key] ? "translate-x-6" : "translate-x-0"
+                              )} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {activeSection === 'visualizer' && (
+                      <div className="space-y-8">
+                        <div>
+                          <h3 className="text-xl font-black text-white mb-1">Visualizer Engine</h3>
+                          <p className="text-xs text-white/40">Fine-tune the visualization performance.</p>
+                        </div>
+                        <div className="space-y-6">
+                          <div className="space-y-3">
+                            <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-white/40">
+                              <span>Clock Speed</span>
+                              <span className="text-primary">{settings.visualizer.speed}x</span>
+                            </div>
+                            <input 
+                              type="range" min="0.1" max="5" step="0.1"
+                              value={settings.visualizer.speed}
+                              onChange={(e) => setSettings('visualizer', { speed: parseFloat(e.target.value) })}
+                              className="w-full h-1.5 bg-white/10 rounded-full appearance-none accent-primary"
+                            />
+                          </div>
+                          <div className="space-y-3">
+                            <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-white/40">
+                              <span>Buffer Scale</span>
+                              <span className="text-primary">{settings.visualizer.nodeSize}px</span>
+                            </div>
+                            <input 
+                              type="range" min="12" max="64" step="2"
+                              value={settings.visualizer.nodeSize}
+                              onChange={(e) => setSettings('visualizer', { nodeSize: parseInt(e.target.value) })}
+                              className="w-full h-1.5 bg-white/10 rounded-full appearance-none accent-primary"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {activeSection === 'audio' && (
+                      <div className="space-y-8">
+                        <div>
+                          <h3 className="text-xl font-black text-white mb-1">Sonic Environment</h3>
+                          <p className="text-xs text-white/40">Manage acoustic feedback systems.</p>
+                        </div>
+                        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-6">
+                          <div className="flex items-center justify-between">
+                            <Volume2 size={20} className="text-white/40" />
+                            <span className="font-mono text-xs text-primary">{Math.round(settings.sound.volume * 100)}%</span>
+                          </div>
+                          <input 
+                            type="range" min="0" max="1" step="0.01"
+                            value={settings.sound.volume}
+                            onChange={(e) => setSettings('sound', { volume: parseFloat(e.target.value) })}
+                            className="w-full h-1.5 bg-white/10 rounded-full appearance-none accent-primary"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {activeSection === 'maintenance' && (
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-xl font-black text-white mb-1">System Health</h3>
+                          <p className="text-xs text-white/40">Manage your algorithmic data persistence.</p>
+                        </div>
+                        <button className="w-full p-4 rounded-xl border border-white/5 bg-white/5 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all flex items-center justify-between group">
+                          <span>Export Core Data</span>
+                          <Download size={16} className="group-hover:translate-y-0.5 transition-transform" />
+                        </button>
+                        <button 
+                          onClick={() => {
+                            if (window.confirm('Wipe all local memory? This process is irreversible.')) {
+                              resetData();
+                              window.location.reload();
+                            }
+                          }}
+                          className="w-full p-4 rounded-xl border border-red-500/10 bg-red-500/5 text-red-500 font-bold text-xs uppercase tracking-widest hover:bg-red-500/10 transition-all flex items-center justify-between group"
+                        >
+                          <span>Purge System Memory</span>
+                          <Trash2 size={16} className="group-hover:scale-110 transition-transform" />
+                        </button>
+                      </div>
+                    )}
+
+                    {activeSection === 'ai' && (
+                      <div className="space-y-6">
+                        <div className="p-8 rounded-[2rem] bg-gradient-to-br from-primary/20 via-transparent to-transparent border border-primary/20 text-center relative overflow-hidden">
+                          <div className="absolute top-0 right-0 p-4 opacity-20"><Sparkles size={40} /></div>
+                          <h3 className="text-lg font-black text-white mb-2">Neural Insights</h3>
+                          <p className="text-xs text-white/40 mb-6">AI-driven algorithm recommendations and complexity analysis.</p>
+                          <div className="inline-block px-4 py-2 rounded-full bg-primary/20 text-primary text-[10px] font-black uppercase tracking-widest animate-pulse">
+                            Beta Protocol Active
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {activeSection === 'accessibility' && (
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-xl font-black text-white mb-1">Inclusion Logic</h3>
+                          <p className="text-xs text-white/40">Ensure the system is accessible to all units.</p>
+                        </div>
+                        {[
+                          { label: 'High Contrast Mode', desc: 'Enhanced clarity for complex structures.' },
+                          { label: 'Screen Reader Support', desc: 'Narrative execution paths.' },
+                          { label: 'Large Typeface', desc: 'Optimized for high-density displays.' },
+                        ].map((item) => (
+                          <div key={item.label} className="flex items-center justify-between p-5 rounded-2xl bg-white/[0.02] border border-white/5 opacity-50 grayscale cursor-not-allowed">
+                            <div>
+                              <h4 className="font-bold text-white text-sm">{item.label}</h4>
+                              <p className="text-[10px] text-white/30 uppercase tracking-tight">{item.desc}</p>
+                            </div>
+                            <div className="w-12 h-6 rounded-full bg-white/5 relative p-1">
+                              <div className="w-4 h-4 rounded-full bg-white/10" />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 bg-black/40 border-t border-white/5 flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-2 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">
+                  <Shield size={12} />
+                  <span>Version 2.4.0-Stable</span>
                 </div>
-              </section>
-
+                <button 
+                  onClick={onClose}
+                  className="px-6 py-2 rounded-lg bg-primary text-white text-[10px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)]"
+                >
+                  Apply Config
+                </button>
+              </div>
             </div>
-          </div>
-
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </AnimatePresence>
   );
 }
+
