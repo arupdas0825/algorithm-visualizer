@@ -75,14 +75,14 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-8 pb-10">
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <header className="flex items-center justify-between gap-6">
         <div>
           <motion.h1 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="text-4xl font-black tracking-tight font-display text-white"
           >
-            Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{user?.name?.split(' ')[0] || 'Explorer'}</span> 👋
+            Algorithm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Dashboard</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, x: -20 }}
@@ -90,63 +90,17 @@ export default function Dashboard() {
             transition={{ delay: 0.1 }}
             className="text-white/40 text-lg mt-1"
           >
-            Tracking progress for <span className="text-white/60 italic">{user?.learningGoal || 'Algorithmic Mastery'}</span>
+            Explore and visualize complex algorithmic patterns
           </motion.p>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <div className="glass-panel px-6 py-3 rounded-2xl border border-white/5 flex items-center gap-4">
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] font-black uppercase tracking-widest text-white/40">XP Progress</span>
-              <span className="text-sm font-bold text-white">{user?.xp || 0} / {user?.level * 1000}</span>
-            </div>
-            <div className="w-24 h-2 bg-white/5 rounded-full overflow-hidden">
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: `${((user?.xp || 0) % 1000) / 10}%` }}
-                className="h-full bg-primary"
-              />
-            </div>
-            <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary font-black text-xs">
-              Lvl {user?.level || 1}
-            </div>
-          </div>
         </div>
       </header>
 
-      {/* Top Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[
-          { label: 'Learning Streak', value: `${user?.streak || 1} Days`, icon: Flame, color: 'text-orange-500', bg: 'bg-orange-500/10' },
-          { label: 'Mastered', value: `${progress?.completedAlgorithms?.length || 0} Algos`, icon: Award, color: 'text-purple-400', bg: 'bg-purple-500/10' },
-          { label: 'Experience', value: user?.experienceLevel || 'Beginner', icon: Shield, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
-          { label: 'Time Spent', value: `${progress?.timeSpent || 0} Mins`, icon: Clock, color: 'text-blue-400', bg: 'bg-blue-500/10' }
-        ].map((stat, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-white/20 transition-all"
-          >
-            <div className={`absolute -right-4 -top-4 w-20 h-20 ${stat.bg} blur-2xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity`} />
-            <div className="flex flex-col gap-4 relative z-10">
-              <div className={`w-12 h-12 rounded-2xl ${stat.bg} flex items-center justify-center ${stat.color} shadow-lg`}>
-                <stat.icon size={24} />
-              </div>
-              <div>
-                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest">{stat.label}</p>
-                <h3 className="text-2xl font-black text-white mt-1">{stat.value}</h3>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Main Content Area */}
-        <div className="lg:col-span-8 flex flex-col gap-8">
+        <div className="lg:col-span-12 flex flex-col gap-8">
           
           {/* Algorithm Modules */}
           <div>
@@ -157,7 +111,7 @@ export default function Dashboard() {
               </h2>
               <button className="text-xs font-bold text-primary hover:underline flex items-center gap-1">View All <ArrowRight size={14}/></button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {categories.map((item, i) => (
                 <motion.div
                   key={i}
@@ -180,39 +134,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Achievements Preview */}
-          <div className="glass-panel p-8 rounded-[2.5rem] border border-primary/20 relative overflow-hidden">
-            <div className="absolute right-0 top-0 w-80 h-80 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
-            <div className="flex items-center justify-between mb-8 relative z-10">
-              <h2 className="text-2xl font-black text-white flex items-center gap-3">
-                <div className="p-2 bg-secondary/10 rounded-lg"><Award size={20} className="text-secondary"/></div>
-                Achievements
-              </h2>
-              <span className="text-xs font-bold text-white/40 uppercase tracking-widest">3 / 12 Unlocked</span>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
-              {[
-                { name: 'Sorting Master', icon: Activity, color: 'text-blue-400', unlocked: true },
-                { name: 'Pathfinder', icon: Share2, color: 'text-pink-400', unlocked: true },
-                { name: 'Tree Architect', icon: Network, color: 'text-emerald-400', unlocked: true },
-                { name: 'DP Genius', icon: Cpu, color: 'text-orange-400', unlocked: false },
-              ].map((ach, i) => (
-                <div key={i} className={`flex flex-col items-center gap-3 p-4 rounded-2xl border ${ach.unlocked ? 'border-white/10 bg-white/5' : 'border-white/5 bg-transparent opacity-40'}`}>
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${ach.unlocked ? 'bg-white/10 ' + ach.color : 'bg-white/5 text-white/20'}`}>
-                    <ach.icon size={24} />
-                  </div>
-                  <span className="text-[10px] font-black uppercase tracking-tight text-center">{ach.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-        </div>
-
-        {/* Sidebar Area */}
-        <div className="lg:col-span-4">
-          <ProfilePanelV2 />
         </div>
       </div>
     </div>
