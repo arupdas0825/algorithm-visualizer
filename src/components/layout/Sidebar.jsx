@@ -9,15 +9,12 @@ import {
   BookOpen, 
   Activity,
   Layers,
-  Zap,
-  Palette
+  Zap
 } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
 import clsx from 'clsx';
 
 export default function Sidebar() {
   const location = useLocation();
-  const { theme, setTheme } = useTheme();
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/dashboard' },
@@ -28,14 +25,6 @@ export default function Sidebar() {
     { id: 'datastructs', label: 'Data Structures', icon: Layers, path: '/datastructs' },
     { id: 'comparison', label: 'Comparison Mode', icon: Zap, path: '/comparison' },
     { id: 'learning', label: 'Learning Hub', icon: BookOpen, path: '/learning' },
-  ];
-
-  const themes = [
-    { id: 'dark', label: 'Dark', color: 'bg-[#0f172a]' },
-    { id: 'amoled', label: 'AMOLED', color: 'bg-black' },
-    { id: 'cyberpunk', label: 'Cyber', color: 'bg-[#000b1e]' },
-    { id: 'neon', label: 'Neon', color: 'bg-[#0d0221]' },
-    { id: 'light', label: 'Light', color: 'bg-white' },
   ];
 
   return (
@@ -77,28 +66,6 @@ export default function Sidebar() {
           );
         })}
       </nav>
-
-      <div className="p-4 mt-auto border-t border-foreground/5 z-10">
-        <div className="flex items-center gap-2 mb-3 px-2 text-foreground/40 text-[10px] font-bold uppercase tracking-widest">
-          <Palette size={12} /> Appearance
-        </div>
-        <div className="flex items-center justify-between gap-1 bg-foreground/5 p-1 rounded-xl">
-          {themes.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTheme(t.id)}
-              className={clsx(
-                "w-7 h-7 rounded-lg border transition-all relative overflow-hidden",
-                t.color,
-                theme === t.id ? "border-primary scale-110 shadow-[0_0_10px_hsl(var(--primary))]" : "border-foreground/10 hover:border-foreground/30"
-              )}
-              title={t.label}
-            >
-              {theme === t.id && <div className="absolute inset-0 bg-primary/20 flex items-center justify-center"><div className="w-1.5 h-1.5 rounded-full bg-white shadow-sm"/></div>}
-            </button>
-          ))}
-        </div>
-      </div>
     </motion.aside>
   );
 }

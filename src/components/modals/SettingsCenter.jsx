@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  X, Palette, Zap, Volume2, Activity, Brain, Settings, 
+  X, Zap, Volume2, Activity, Brain, Settings, 
   Monitor, MousePointer2, Accessibility, LogOut, Trash2, 
   Download, Check, ChevronRight, Sparkles, Shield, Cpu
 } from 'lucide-react';
@@ -12,7 +12,7 @@ import clsx from 'clsx';
 export default function SettingsCenter({ isOpen, onClose }) {
   const { settings, setSettings, resetData } = useUserStore();
   const { theme, setTheme } = useTheme();
-  const [activeSection, setActiveSection] = useState('appearance');
+  const [activeSection, setActiveSection] = useState('motion');
 
   // ESC key to close
   useEffect(() => {
@@ -26,7 +26,6 @@ export default function SettingsCenter({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const sections = [
-    { id: 'appearance', label: 'Appearance', icon: Palette, color: 'text-indigo-400' },
     { id: 'motion', label: 'Motion & Dynamics', icon: Zap, color: 'text-yellow-400' },
     { id: 'visualizer', label: 'Visualizer Engine', icon: Cpu, color: 'text-emerald-400' },
     { id: 'audio', label: 'Sonic Environment', icon: Volume2, color: 'text-cyan-400' },
@@ -35,10 +34,7 @@ export default function SettingsCenter({ isOpen, onClose }) {
     { id: 'maintenance', label: 'Maintenance', icon: Shield, color: 'text-red-400' },
   ];
 
-  const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
-    setSettings('appearance', { theme: newTheme });
-  };
+
 
   return (
     <AnimatePresence>
@@ -115,35 +111,7 @@ export default function SettingsCenter({ isOpen, onClose }) {
                     transition={{ duration: 0.2 }}
                     className="space-y-10"
                   >
-                    {activeSection === 'appearance' && (
-                      <div className="space-y-8">
-                        <div>
-                          <h3 className="text-xl font-black text-white mb-1">Visual Architecture</h3>
-                          <p className="text-xs text-white/40">Select your preferred system aesthetic.</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3">
-                          {[
-                            { id: 'dark', label: 'Dark', color: 'bg-[#0f172a]' },
-                            { id: 'amoled', label: 'AMOLED', color: 'bg-black' },
-                            { id: 'cyberpunk', label: 'Cyber', color: 'bg-[#000b1e]' },
-                            { id: 'light', label: 'Light', color: 'bg-white' },
-                          ].map((t) => (
-                            <button
-                              key={t.id}
-                              onClick={() => handleThemeChange(t.id)}
-                              className={clsx(
-                                "p-4 rounded-2xl border-2 transition-all text-left relative group",
-                                theme === t.id ? "border-primary bg-primary/10" : "border-white/5 bg-white/5 hover:border-white/10"
-                              )}
-                            >
-                              <div className={clsx("w-8 h-8 rounded-lg mb-3 shadow-lg", t.color)} />
-                              <span className="font-bold text-white text-xs uppercase tracking-widest">{t.label}</span>
-                              {theme === t.id && <Check size={16} className="absolute top-4 right-4 text-primary" />}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+
 
                     {activeSection === 'motion' && (
                       <div className="space-y-6">
