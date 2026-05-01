@@ -212,8 +212,8 @@ export default function Dashboard() {
         {/* Sidebar Area */}
         <div className="lg:col-span-4 flex flex-col gap-8">
           
-          {/* Profile Card Summary - Apple Style Glassmorphism */}
-          <div className="bg-white/10 backdrop-blur-3xl p-8 rounded-[2.5rem] border border-white/20 relative overflow-hidden flex flex-col items-center text-center shadow-2xl">
+          {/* Profile Card Summary - Premium Solid Panel */}
+          <div className="bg-[#0a0f1d] p-8 rounded-[2.5rem] border border-white/10 relative overflow-hidden flex flex-col items-center text-center shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
             <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-secondary p-1 mb-6 shadow-lg">
               <div className="w-full h-full rounded-[1.8rem] bg-[#030712] flex items-center justify-center overflow-hidden">
@@ -239,8 +239,8 @@ export default function Dashboard() {
             </div>
           </div>
           
-          {/* AI Personalization */}
-          <div className="glass-panel p-8 rounded-[2.5rem] border border-white/10">
+          {/* AI Personalization - Solid Style */}
+          <div className="bg-[#0a0f1d] p-8 rounded-[2.5rem] border border-white/10 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-warning/10 rounded-lg text-warning"><Zap size={20}/></div>
               <h2 className="text-xl font-black text-white">AI Assistant</h2>
@@ -264,8 +264,8 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Daily Goal */}
-          <div className="glass-panel p-8 rounded-[2.5rem] border border-accent/20 bg-accent/5">
+          {/* Daily Goal - Solid Style */}
+          <div className="bg-[#0d1224] p-8 rounded-[2.5rem] border border-accent/20 shadow-xl">
             <h3 className="text-lg font-black text-white mb-4 flex items-center gap-2"><Target size={18} className="text-accent"/> Daily Objective</h3>
             <p className="text-sm text-white/60 mb-6">Solve 2 Sorting algorithms to maintain your {user?.streak || 1} day streak.</p>
             <div className="flex items-center gap-3">

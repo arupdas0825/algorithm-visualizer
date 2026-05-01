@@ -58,11 +58,11 @@
 
 @layer components {
   .glass-panel {
-    @apply bg-surface/40 backdrop-blur-xl border border-white/10 shadow-2xl;
+    @apply bg-surface/90 backdrop-blur-2xl border border-white/10 shadow-2xl;
   }
 
   .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-[20px] border border-white/10 rounded-[3rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)];
+    @apply bg-surface/95 backdrop-blur-[30px] border border-white/10 rounded-[3rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)];
   }
   
   .glass-button {
