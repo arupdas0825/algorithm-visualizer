@@ -212,11 +212,11 @@ export default function Dashboard() {
         {/* Sidebar Area */}
         <div className="lg:col-span-4 flex flex-col gap-8">
           
-          {/* Profile Card Summary */}
-          <div className="glass-panel p-8 rounded-[2.5rem] border border-white/10 relative overflow-hidden flex flex-col items-center text-center">
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-            <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-secondary p-1 mb-6">
-              <div className="w-full h-full rounded-[1.8rem] bg-surface flex items-center justify-center overflow-hidden">
+          {/* Profile Card Summary - Apple Style Glassmorphism */}
+          <div className="bg-white/10 backdrop-blur-3xl p-8 rounded-[2.5rem] border border-white/20 relative overflow-hidden flex flex-col items-center text-center shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+            <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-secondary p-1 mb-6 shadow-lg">
+              <div className="w-full h-full rounded-[1.8rem] bg-[#030712] flex items-center justify-center overflow-hidden">
                 {user?.profilePhoto ? (
                   <img src={user.profilePhoto} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
@@ -225,15 +225,15 @@ export default function Dashboard() {
               </div>
             </div>
             <h3 className="text-2xl font-black text-white">@{user?.username || 'user'}</h3>
-            <p className="text-white/40 text-sm mt-1">{user?.bio || 'Initializing algorithmic genius...'}</p>
+            <p className="text-white/60 text-sm mt-1">{user?.bio || 'Initializing algorithmic genius...'}</p>
             
             <div className="w-full grid grid-cols-2 gap-4 mt-8">
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-1">Favorite</p>
+              <div className="p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Favorite</p>
                 <p className="text-xs font-bold text-primary truncate">{user?.favAlgo || 'Binary Search'}</p>
               </div>
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-1">Role</p>
+              <div className="p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Role</p>
                 <p className="text-xs font-bold text-secondary truncate">{user?.experienceLevel || 'Engineer'}</p>
               </div>
             </div>

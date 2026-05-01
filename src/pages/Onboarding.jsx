@@ -62,7 +62,7 @@ export default function Onboarding() {
     'Improve Problem Solving'
   ];
 
-  const totalSteps = 6;
+  const totalSteps = 5;
   const progress = (step / totalSteps) * 100;
 
   return (
@@ -383,21 +383,12 @@ export default function Onboarding() {
                   </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center p-8 bg-white/5 border-2 border-dashed border-white/10 rounded-[2.5rem] hover:border-accent/30 hover:bg-accent/5 transition-all cursor-pointer group">
-                  <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Camera size={32} className="text-white/20 group-hover:text-accent" />
-                  </div>
-                  <span className="text-sm font-bold text-white/40 group-hover:text-white">Upload Avatar</span>
-                  <span className="text-[10px] text-white/20 mt-1 uppercase tracking-widest">JPG, PNG up to 2MB</span>
-                </div>
-              </div>
-
               <div className="flex gap-4">
                 <button onClick={handleBack} className="p-5 rounded-2xl border border-white/10 text-white/60 hover:bg-white/5 transition-all">
                   <ChevronLeft size={24} />
                 </button>
                 <button 
-                  onClick={handleNext}
+                  onClick={handleFinish}
                   className="flex-1 py-5 rounded-2xl bg-white text-black font-black text-lg shadow-xl shadow-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                   Finalize Initialization
@@ -406,67 +397,6 @@ export default function Onboarding() {
             </motion.div>
           )}
 
-          {/* STEP 6: FINALIZE */}
-          {step === 6 && (
-            <motion.div
-              key="step6"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center"
-            >
-              <div className="relative w-48 h-48 mx-auto mb-10">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", damping: 12, stiffness: 100 }}
-                  className="absolute inset-0 bg-primary/20 rounded-full blur-3xl"
-                />
-                <motion.div
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="w-full h-full border-4 border-primary rounded-full border-t-transparent animate-spin-slow"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.5, type: "spring" }}
-                    className="w-24 h-24 bg-primary rounded-3xl flex items-center justify-center shadow-[0_0_40px_rgba(99,102,241,0.6)]"
-                  >
-                    <CheckCircle2 size={48} className="text-white" />
-                  </motion.div>
-                </div>
-              </div>
-
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-4xl font-black text-white mb-4"
-              >
-                Access Granted, {formData.name}
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-                className="text-white/40 text-lg mb-12"
-              >
-                Your algorithmic journey begins now. System ready.
-              </motion.p>
-
-              <motion.button 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 }}
-                onClick={handleFinish}
-                className="group px-12 py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary text-white font-black text-xl hover:scale-105 transition-all shadow-[0_0_30px_rgba(99,102,241,0.4)]"
-              >
-                Enter Dashboard
-              </motion.button>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
     </div>

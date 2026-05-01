@@ -14,7 +14,6 @@ import DPVisualizer from './pages/DPVisualizer';
 import DataStructures from './pages/DataStructures';
 import LearningHub from './pages/LearningHub';
 import ComparisonMode from './pages/ComparisonMode';
-import Settings from './pages/Settings';
 import Onboarding from './pages/Onboarding';
 import { useUserStore } from './store/useUserStore';
 
@@ -39,7 +38,6 @@ export default function App() {
           <Route path="/datastructs" element={<DataStructures />} />
           <Route path="/learning" element={<LearningHub />} />
           <Route path="/comparison" element={<ComparisonMode />} />
-          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
     </AnimatePresence>

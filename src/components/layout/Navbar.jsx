@@ -4,7 +4,6 @@ import { useUserStore } from '../../store/useUserStore';
 import { 
   User, 
   LogOut, 
-  Settings, 
   Award, 
   Zap, 
   ChevronDown, 
@@ -113,21 +112,6 @@ export default function Navbar() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-1">
-                  <Link to="/settings" className="flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 transition-all group" onClick={() => setIsOpen(false)}>
-                    <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all"><User size={18}/></div>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-bold text-white">Identity Profile</span>
-                      <span className="text-[10px] text-white/30 font-bold uppercase tracking-tight">Modify your core data</span>
-                    </div>
-                  </Link>
-
-                  <Link to="/settings" className="flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 transition-all group" onClick={() => setIsOpen(false)}>
-                    <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 group-hover:bg-secondary group-hover:text-white transition-all"><Trophy size={18}/></div>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-bold text-white">Achievements</span>
-                      <span className="text-[10px] text-white/30 font-bold uppercase tracking-tight">View unlocked badges</span>
-                    </div>
-                  </Link>
 
                   <Link to="/dashboard" className="flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 transition-all group" onClick={() => setIsOpen(false)}>
                     <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all"><LayoutGrid size={18}/></div>

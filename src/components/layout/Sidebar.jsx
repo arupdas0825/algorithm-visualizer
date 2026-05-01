@@ -7,7 +7,6 @@ import {
   Network, 
   Cpu, 
   BookOpen, 
-  Settings, 
   Activity,
   Layers,
   Zap,
@@ -104,16 +103,6 @@ export default function Sidebar() {
             />
           ))}
         </div>
-        <NavLink 
-          to="/settings"
-          className={({ isActive }) => clsx(
-            "flex items-center gap-3 px-4 py-3 w-full rounded-xl transition-all duration-300 text-sm font-medium",
-            isActive ? "text-white bg-white/10 shadow-inner" : "text-muted hover:text-white hover:bg-white/5"
-          )}
-        >
-          <Settings size={18} />
-          <span>Settings</span>
-        </NavLink>
       </div>
     </motion.aside>
   );
