@@ -68,7 +68,9 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/30 overflow-x-hidden;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    @apply font-sans antialiased selection:bg-primary/30 overflow-x-hidden;
     transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     background-attachment: fixed;
     background-image: 
@@ -135,7 +137,9 @@
   }
   
   .glass-button {
-    @apply relative overflow-hidden bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 hover:border-foreground/20 transition-all duration-300 backdrop-blur-md shadow-lg flex items-center justify-center gap-2 font-medium;
+    @apply relative overflow-hidden border transition-all duration-300 backdrop-blur-md shadow-lg flex items-center justify-center gap-2 font-medium;
+    background-color: hsl(var(--foreground) / 0.05);
+    border-color: hsl(var(--foreground) / 0.1);
   }
 
   .neon-text {
@@ -147,7 +151,9 @@
   }
 
   .glass-theme {
-    @apply bg-surface/60 backdrop-blur-xl border border-foreground/10 shadow-xl;
+    @apply backdrop-blur-xl shadow-xl;
+    background-color: hsl(var(--surface) / 0.6);
+    border: 1px solid hsl(var(--foreground) / 0.1);
   }
 }
 
@@ -190,7 +196,7 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  background-color: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-surface/80 rounded-full border border-white/10;
