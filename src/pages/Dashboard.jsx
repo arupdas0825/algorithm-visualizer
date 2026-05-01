@@ -74,7 +74,7 @@ export default function Dashboard() {
   const aiRecs = getAIRecommendations();
 
   return (
-    <div className="flex flex-col h-full gap-8 overflow-y-auto pb-10 scrollbar-hide">
+    <div className="flex flex-col gap-8 pb-10">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <motion.h1 
@@ -143,7 +143,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Main Content Area */}
         <div className="lg:col-span-8 flex flex-col gap-8">

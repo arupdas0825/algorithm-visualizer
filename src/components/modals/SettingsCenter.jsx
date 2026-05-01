@@ -56,24 +56,29 @@ export default function SettingsCenter({ isOpen, onClose }) {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="relative w-full max-w-5xl h-[85vh] vision-glass rounded-[3rem] flex overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)]"
+          className="relative w-full max-w-6xl h-[90vh] md:h-[85vh] vision-glass rounded-[2rem] md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)]"
         >
           {/* Sidebar */}
-          <div className="w-72 border-r border-white/10 bg-black/40 p-8 flex flex-col">
-            <div className="flex items-center gap-3 mb-12">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-[0_0_20px_rgba(99,102,241,0.5)]">
-                <Settings size={20} />
+          <div className="w-full md:w-80 border-b md:border-b-0 md:border-r border-white/10 bg-black/40 p-6 md:p-8 flex flex-col">
+            <div className="flex items-center justify-between mb-8 md:mb-12">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-[0_0_20px_rgba(99,102,241,0.5)]">
+                  <Settings size={20} />
+                </div>
+                <h2 className="text-lg md:text-xl font-black text-white tracking-tight uppercase">Settings</h2>
               </div>
-              <h2 className="text-xl font-black text-white tracking-tight uppercase">Control Center</h2>
+              <button onClick={onClose} className="md:hidden p-2 text-white/40 hover:text-white">
+                <X size={20} />
+              </button>
             </div>
 
-            <nav className="flex-1 space-y-1">
+            <nav className="flex md:flex-col gap-1 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 scrollbar-hide">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
-                  className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white transition-all font-bold text-sm group text-left"
+                  className="whitespace-nowrap flex items-center gap-3 px-4 py-2.5 rounded-xl text-white/40 hover:bg-white/5 hover:text-white transition-all font-bold text-xs md:text-sm group text-left"
                 >
-                  <cat.icon size={20} className="group-hover:text-primary transition-colors" />
+                  <cat.icon size={18} className="group-hover:text-primary transition-colors" />
                   {cat.label}
                 </button>
               ))}
@@ -86,7 +91,7 @@ export default function SettingsCenter({ isOpen, onClose }) {
                   window.location.reload();
                 }
               }}
-              className="mt-auto flex items-center gap-4 px-4 py-3.5 rounded-2xl text-red-500/60 hover:bg-red-500/10 hover:text-red-500 transition-all font-bold text-sm group"
+              className="mt-auto hidden md:flex items-center gap-4 px-4 py-3.5 rounded-2xl text-red-500/60 hover:bg-red-500/10 hover:text-red-500 transition-all font-bold text-sm group"
             >
               <Trash2 size={20} />
               Wipe Core Data
@@ -274,13 +279,6 @@ export default function SettingsCenter({ isOpen, onClose }) {
             </div>
           </div>
 
-          {/* Close Button Mobile */}
-          <button 
-            onClick={onClose}
-            className="absolute top-8 right-8 w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 hover:bg-white/10 hover:text-white transition-all md:hidden"
-          >
-            <X size={24} />
-          </button>
         </motion.div>
       </div>
     </AnimatePresence>

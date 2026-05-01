@@ -43,7 +43,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="h-20 border-b border-white/5 bg-[#030712]/40 backdrop-blur-2xl flex items-center justify-between px-8 z-[60] sticky top-0">
+    <nav className="h-20 border-b border-white/5 bg-[#030712]/40 backdrop-blur-2xl flex items-center justify-between px-8 z-[60]">
       <div className="flex items-center gap-8">
         {/* LOGO SECTION */}
         <Link to="/dashboard" className="flex items-center gap-3 group">
