@@ -16,7 +16,12 @@ import {
   TrendingUp,
   Star,
   Target,
-  ArrowRight
+  ArrowRight,
+  Settings as SettingsIcon,
+  User as UserIcon,
+  LogOut,
+  Palette,
+  Eye
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -212,29 +217,84 @@ export default function Dashboard() {
         {/* Sidebar Area */}
         <div className="lg:col-span-4 flex flex-col gap-8">
           
-          {/* Profile Card Summary - Premium Solid Panel */}
-          <div className="bg-[#0a0f1d] p-8 rounded-[2.5rem] border border-white/10 relative overflow-hidden flex flex-col items-center text-center shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-            <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-secondary p-1 mb-6 shadow-lg">
-              <div className="w-full h-full rounded-[1.8rem] bg-[#030712] flex items-center justify-center overflow-hidden">
-                {user?.profilePhoto ? (
-                  <img src={user.profilePhoto} alt={user.name} className="w-full h-full object-cover" />
-                ) : (
-                  <span className="text-3xl font-black text-white">{user?.name?.[0] || 'U'}</span>
-                )}
+          {/* Profile Card Summary - Ultra Solid Premium Panel */}
+          <div className="bg-[#0f172a] p-8 rounded-[2.5rem] border border-white/10 relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 pointer-events-none opacity-50" />
+            
+            {/* Header Info */}
+            <div className="relative z-10 w-full flex flex-col items-center">
+              <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-secondary p-1 mb-6 shadow-2xl scale-110">
+                <div className="w-full h-full rounded-[1.8rem] bg-[#030712] flex items-center justify-center overflow-hidden">
+                  {user?.profilePhoto ? (
+                    <img src={user.profilePhoto} alt={user.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-4xl font-black text-white">{user?.name?.[0] || 'U'}</span>
+                  )}
+                </div>
+              </div>
+              <h3 className="text-2xl font-black text-white tracking-tight">@{user?.username || 'user'}</h3>
+              <p className="text-white/60 text-sm mt-2 font-medium leading-relaxed max-w-[200px]">{user?.bio || 'Initializing algorithmic genius...'}</p>
+              
+              <div className="w-full grid grid-cols-2 gap-3 mt-8">
+                <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/5">
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30 mb-1">Favorite</p>
+                  <p className="text-xs font-bold text-primary truncate">{user?.favAlgo || 'Binary Search'}</p>
+                </div>
+                <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/5">
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30 mb-1">Role</p>
+                  <p className="text-xs font-bold text-secondary truncate">{user?.experienceLevel || 'Engineer'}</p>
+                </div>
               </div>
             </div>
-            <h3 className="text-2xl font-black text-white">@{user?.username || 'user'}</h3>
-            <p className="text-white/60 text-sm mt-1">{user?.bio || 'Initializing algorithmic genius...'}</p>
-            
-            <div className="w-full grid grid-cols-2 gap-4 mt-8">
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Favorite</p>
-                <p className="text-xs font-bold text-primary truncate">{user?.favAlgo || 'Binary Search'}</p>
+
+            {/* INTEGRATED SETTINGS SECTION */}
+            <div className="w-full mt-10 pt-8 border-t border-white/5 relative z-10">
+              <div className="flex items-center gap-2 mb-6 px-2">
+                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/40">
+                  <SettingsIcon size={16} />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">System Control</span>
               </div>
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Role</p>
-                <p className="text-xs font-bold text-secondary truncate">{user?.experienceLevel || 'Engineer'}</p>
+
+              <div className="grid grid-cols-1 gap-2">
+                <button className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group text-left">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                    <UserIcon size={18} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-white">Edit Profile</span>
+                    <span className="text-[9px] text-white/30 uppercase font-black tracking-tighter">Modify Identity</span>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => window.dispatchEvent(new CustomEvent('toggle-cinematic'))}
+                  className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group text-left"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+                    <Eye size={18} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-white">Cinematic Mode</span>
+                    <span className="text-[9px] text-white/30 uppercase font-black tracking-tighter">Toggle Visualizer</span>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => {
+                    useUserStore.getState().setOnboarded(false);
+                    navigate('/onboarding');
+                  }}
+                  className="flex items-center gap-3 p-3 rounded-xl bg-red-500/5 border border-red-500/10 hover:bg-red-500/20 hover:border-red-500/20 transition-all group text-left mt-2"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center text-red-400 group-hover:bg-red-500 group-hover:text-white transition-all">
+                    <LogOut size={18} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-white">Sign Out</span>
+                    <span className="text-[9px] text-white/30 uppercase font-black tracking-tighter">Terminate Session</span>
+                  </div>
+                </button>
               </div>
             </div>
           </div>

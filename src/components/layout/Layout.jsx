@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
@@ -7,6 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Layout() {
   const [isCinematic, setIsCinematic] = useState(false);
+  useEffect(() => {
+    const handleToggle = () => setIsCinematic(prev => !prev);
+    window.addEventListener('toggle-cinematic', handleToggle);
+    return () => window.removeEventListener('toggle-cinematic', handleToggle);
+  }, []);
 
   return (
     <div className="flex h-screen bg-background text-foreground transition-colors duration-500 overflow-hidden relative">
