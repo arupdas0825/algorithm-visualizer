@@ -36,7 +36,7 @@ export default function ProfilePanelV2() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="vision-glass rounded-[3rem] p-8 shimmer-border"
+        className="glass-card p-8 shimmer-border"
       >
         {/* User Info Header */}
         <div className="flex items-center gap-6 mb-8">
@@ -109,7 +109,7 @@ export default function ProfilePanelV2() {
         </div>
 
         {/* Quick Actions Grid */}
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           <button 
             onClick={() => setIsEditOpen(true)}
             className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] hover:border-white/20 transition-all group"
@@ -117,16 +117,7 @@ export default function ProfilePanelV2() {
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
               <User size={20} />
             </div>
-            <span className="text-[10px] font-bold text-white">Edit</span>
-          </button>
-          <button 
-            onClick={() => setIsSettingsOpen(true)}
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] hover:border-white/20 transition-all group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-              <Settings size={20} />
-            </div>
-            <span className="text-[10px] font-bold text-white">Settings</span>
+            <span className="text-[10px] font-bold text-white">Edit Profile</span>
           </button>
           <button 
             onClick={() => {

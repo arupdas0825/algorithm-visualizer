@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Sparkles, BarChart2, Map, Zap, Settings2, Github } from 'lucide-react';
+import { ArrowRight, Play, Sparkles, BarChart2, Map, Zap, Settings2, Terminal as Github } from 'lucide-react';
 
 /**
  * Stunning hero landing page inspired by premium tech products.

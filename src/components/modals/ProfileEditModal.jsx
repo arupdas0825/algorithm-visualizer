@@ -9,9 +9,7 @@ import {
   Target, 
   Sparkles,
   Link as LinkIcon,
-  Globe,
-  Github,
-  Twitter
+  Globe
 } from 'lucide-react';
 import { useUserStore } from '../../store/useUserStore';
 import clsx from 'clsx';
@@ -107,37 +105,7 @@ export default function ProfileEditModal({ isOpen, onClose }) {
                 
                 {activeTab === 'identity' && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
-                    {/* Avatar Section */}
-                    <div className="flex items-center gap-8">
-                      <div className="relative group">
-                        <div className="w-32 h-32 rounded-[2.5rem] bg-gradient-to-br from-primary to-secondary p-1">
-                          <div className="w-full h-full rounded-[2.3rem] bg-[#030712] overflow-hidden flex items-center justify-center">
-                            {formData.profilePhoto ? (
-                              <img src={formData.profilePhoto} className="w-full h-full object-cover" />
-                            ) : (
-                              <User size={48} className="text-white/20" />
-                            )}
-                          </div>
-                        </div>
-                        <button 
-                          onClick={() => fileInputRef.current?.click()}
-                          className="absolute -bottom-2 -right-2 w-10 h-10 rounded-xl bg-white text-black flex items-center justify-center shadow-xl hover:scale-110 transition-all"
-                        >
-                          <Camera size={18} />
-                        </button>
-                        <input 
-                          type="file" 
-                          ref={fileInputRef} 
-                          className="hidden" 
-                          accept="image/*"
-                          onChange={handleImageUpload}
-                        />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-white mb-1">Display Avatar</h4>
-                        <p className="text-white/40 text-sm">Recommended: Square image, max 2MB.</p>
-                      </div>
-                    </div>
+
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
@@ -215,8 +183,8 @@ export default function ProfileEditModal({ isOpen, onClose }) {
                 {activeTab === 'social' && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
                     {[
-                      { icon: Github, label: 'GitHub', key: 'github' },
-                      { icon: Twitter, label: 'Twitter / X', key: 'twitter' },
+                      { icon: Terminal, label: 'GitHub', key: 'github' },
+                      { icon: LinkIcon, label: 'Twitter / X', key: 'twitter' },
                       { icon: Globe, label: 'Website', key: 'website' },
                     ].map((item) => (
                       <div key={item.key} className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/5">
