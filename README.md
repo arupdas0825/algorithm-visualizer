@@ -1,5 +1,7 @@
 <div align="center">
-  <img src="https://grainy-gradients.vercel.app/noise.svg" width="100%" height="200px" style="object-fit: cover; opacity: 0.2; position: absolute; z-index: -1" />
+ <img width="100%" height="100%" alt="image" src="https://github.com/user-attachments/assets/16f37887-1a39-44f4-869c-4e401b3f70c0" />
+
+
   
   <br />
   
