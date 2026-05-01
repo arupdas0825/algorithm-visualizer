@@ -49,17 +49,17 @@ export default function SettingsCenter({ isOpen, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/80 backdrop-blur-md"
+          className="absolute inset-0 bg-black/95 backdrop-blur-xl"
         />
         
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="relative w-full max-w-6xl h-[90vh] md:h-[85vh] vision-glass rounded-[2rem] md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)]"
+          className="relative w-full max-w-6xl h-[95vh] md:h-[85vh] bg-[#030712] border border-white/10 rounded-[1.5rem] md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)]"
         >
           {/* Sidebar */}
-          <div className="w-full md:w-80 border-b md:border-b-0 md:border-r border-white/10 bg-black/40 p-6 md:p-8 flex flex-col">
+          <div className="w-full md:w-80 border-b md:border-b-0 md:border-r border-white/10 bg-black p-6 md:p-8 flex flex-col shrink-0">
             <div className="flex items-center justify-between mb-8 md:mb-12">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-[0_0_20px_rgba(99,102,241,0.5)]">
@@ -99,7 +99,7 @@ export default function SettingsCenter({ isOpen, onClose }) {
           </div>
 
           {/* Content Area */}
-          <div className="flex-1 overflow-y-auto bg-[#030712]/40 scrollbar-hide">
+          <div className="flex-1 overflow-y-auto bg-[#030712] scrollbar-thin">
             <div className="p-12 max-w-3xl mx-auto space-y-16">
               
               {/* Appearance */}
