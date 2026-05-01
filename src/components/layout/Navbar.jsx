@@ -10,14 +10,20 @@ import {
   Bell,
   Activity,
   Trophy,
-  LayoutGrid
+  LayoutGrid,
+  Settings as SettingsIcon,
+  Sparkles
 } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
+import ProfileEditModal from '../modals/ProfileEditModal';
+import SettingsCenter from '../modals/SettingsCenter';
 import clsx from 'clsx';
 
 export default function Navbar() {
   const { user, resetData } = useUserStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -38,14 +44,23 @@ export default function Navbar() {
 
   return (
     <nav className="h-20 border-b border-white/5 bg-[#030712]/40 backdrop-blur-2xl flex items-center justify-between px-8 z-[60] sticky top-0">
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/10 rounded-2xl shadow-[inset_0_0_10px_rgba(99,102,241,0.05)]">
+      <div className="flex items-center gap-8">
+        {/* LOGO SECTION */}
+        <Link to="/dashboard" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary p-0.5 shadow-[0_0_20px_rgba(99,102,241,0.3)] group-hover:scale-110 transition-transform">
+            <div className="w-full h-full rounded-[10px] bg-[#030712] flex items-center justify-center overflow-hidden">
+              <img src="/logo.png" alt="Algomate Logo" className="w-full h-full object-cover" />
+            </div>
+          </div>
+          <div className="flex flex-col leading-none">
+            <span className="text-xl font-black text-white tracking-tighter group-hover:text-primary transition-colors">ALGOMATE</span>
+            <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.3em]">Neural Interface</span>
+          </div>
+        </Link>
+
+        <div className="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/10 rounded-2xl shadow-[inset_0_0_10px_rgba(99,102,241,0.05)] hidden lg:flex">
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(99,102,241,1)]" />
           <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Neural Core Active</span>
-        </div>
-        
-        <div className="hidden md:flex items-center gap-1 text-white/20">
-          <span className="text-[10px] font-bold uppercase tracking-widest">OS v2.0.4</span>
         </div>
       </div>
 
@@ -113,22 +128,46 @@ export default function Navbar() {
 
                 <div className="grid grid-cols-1 gap-1">
 
-                  <Link to="/dashboard" className="flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 transition-all group" onClick={() => setIsOpen(false)}>
-                    <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all"><LayoutGrid size={18}/></div>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-bold text-white">Grid Dashboard</span>
-                      <span className="text-[10px] text-white/30 font-bold uppercase tracking-tight">System overview</span>
+                  <button 
+                    onClick={() => {
+                      setIsEditOpen(true);
+                      setIsOpen(false);
+                    }}
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 transition-all group w-full text-left"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all">
+                      <User size={18}/>
                     </div>
-                  </Link>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-bold text-white">Edit Profile</span>
+                      <span className="text-[10px] text-white/30 font-bold uppercase tracking-tight">Identity settings</span>
+                    </div>
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setIsSettingsOpen(true);
+                      setIsOpen(false);
+                    }}
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 transition-all group w-full text-left"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 group-hover:bg-secondary group-hover:text-white transition-all">
+                      <SettingsIcon size={18}/>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-bold text-white">System Control</span>
+                      <span className="text-[10px] text-white/30 font-bold uppercase tracking-tight">Core configuration</span>
+                    </div>
+                  </button>
                 </div>
 
                 <div className="h-px bg-white/5 my-2 mx-4" />
 
                 <button 
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-error/10 text-error/60 hover:text-error transition-all group"
+                  className="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-red-500/10 text-red-400/60 hover:text-red-400 transition-all group"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-error/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-error group-hover:text-white transition-all"><LogOut size={18}/></div>
+                  <div className="w-9 h-9 rounded-xl bg-red-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-red-500 group-hover:text-white transition-all"><LogOut size={18}/></div>
                   <div className="flex flex-col text-left">
                     <span className="text-sm font-bold">Terminate Session</span>
                     <span className="text-[10px] font-bold uppercase tracking-tight opacity-40">Logout of Algorithm OS</span>
@@ -139,6 +178,10 @@ export default function Navbar() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* MODALS */}
+      <ProfileEditModal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} />
+      <SettingsCenter isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </nav>
   );
 }

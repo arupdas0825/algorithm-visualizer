@@ -57,6 +57,54 @@
 }
 
 @layer components {
+  .vision-glass {
+    @apply bg-surface/40 backdrop-blur-[30px] border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] relative overflow-hidden;
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .vision-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.05;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .shimmer-border {
+    @apply relative overflow-hidden;
+  }
+
+  .shimmer-border::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0 340deg,
+      white 360deg
+    );
+    animation: rotate 4s linear infinite;
+    opacity: 0.1;
+  }
+
+  .glass-card-premium {
+    @apply bg-surface/60 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-2xl relative overflow-hidden;
+  }
+
+  .glass-card-premium::after {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none;
+  }
+
   .glass-panel {
     @apply bg-surface/90 backdrop-blur-2xl border border-white/10 shadow-2xl;
   }
@@ -78,6 +126,22 @@
     background: linear-gradient(to right, #1A1D2D, #1A1D2D) padding-box,
                 linear-gradient(to right, #6366f1, #a855f7) border-box;
   }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
 
 @keyframes spin-slow {
