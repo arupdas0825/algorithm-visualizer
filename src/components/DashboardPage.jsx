@@ -6,10 +6,10 @@ import { BarChart2, Map, Layers, LayoutTemplate, BrainCircuit, Code2, Database, 
  */
 export default function DashboardPage({ onNavigate }) {
     const quickCards = [
-        { key: 'sorting', icon: BarChart2, title: 'Sorting Visualizer', desc: '3 algorithms', color: '#6366f1', stat: 'Bubble, Merge, Quick' },
-        { key: 'graph', icon: Map, title: 'Graph Visualizer', desc: '3 algorithms', color: '#2dd4bf', stat: 'BFS, DFS, Dijkstra' },
-        { key: 'datastructs', icon: Layers, title: 'Data Structures', desc: '6 structures', color: '#f59e0b', stat: 'Stack, Queue, Tree…' },
-        { key: 'comparison', icon: LayoutTemplate, title: 'Algorithm Compare', desc: 'Side-by-side', color: '#ec4899', stat: 'Compare performance' },
+        { key: 'sorting', icon: BarChart2, title: 'Sorting Visualizer', desc: '3 algorithms', color: 'hsl(var(--primary))', stat: 'Bubble, Merge, Quick' },
+        { key: 'graph', icon: Map, title: 'Graph Visualizer', desc: '3 algorithms', color: 'hsl(var(--accent))', stat: 'BFS, DFS, Dijkstra' },
+        { key: 'datastructs', icon: Layers, title: 'Data Structures', desc: '6 structures', color: 'hsl(var(--warning))', stat: 'Stack, Queue, Tree…' },
+        { key: 'comparison', icon: LayoutTemplate, title: 'Algorithm Compare', desc: 'Side-by-side', color: 'hsl(var(--secondary))', stat: 'Compare performance' },
     ];
 
     const recentItems = [
@@ -21,10 +21,10 @@ export default function DashboardPage({ onNavigate }) {
     ];
 
     const stats = [
-        { label: 'Algorithms', value: '6', icon: Code2, color: '#6366f1' },
-        { label: 'Visualizations', value: '2', icon: BrainCircuit, color: '#2dd4bf' },
-        { label: 'Data Structures', value: '6', icon: Database, color: '#f59e0b' },
-        { label: 'Learning Modules', value: '4', icon: BookOpen, color: '#ec4899' },
+        { label: 'Algorithms', value: '6', icon: Code2, color: 'hsl(var(--primary))' },
+        { label: 'Visualizations', value: '2', icon: BrainCircuit, color: 'hsl(var(--accent))' },
+        { label: 'Data Structures', value: '6', icon: Database, color: 'hsl(var(--warning))' },
+        { label: 'Learning Modules', value: '4', icon: BookOpen, color: 'hsl(var(--secondary))' },
     ];
 
     const containerVariants = {
@@ -63,12 +63,12 @@ export default function DashboardPage({ onNavigate }) {
                     const Icon = s.icon;
                     return (
                         <motion.div 
-                            className="dash-stat-card glass-panel" 
+                            className="dash-stat-card glass-panel transition-colors duration-500" 
                             key={s.label}
                             whileHover={{ y: -5, scale: 1.02 }}
                             transition={{ type: "spring", stiffness: 400, damping: 10 }}
                         >
-                            <div className="dash-stat-icon" style={{ background: s.color + '18', color: s.color }}>
+                            <div className="dash-stat-icon" style={{ background: `color-mix(in srgb, ${s.color}, transparent 85%)`, color: s.color }}>
                                 <Icon size={24} />
                             </div>
                             <div className="dash-stat-info">
@@ -146,21 +146,21 @@ export default function DashboardPage({ onNavigate }) {
                     <div className="tip-item">
                         <span className="tip-num text-primary/40">01</span>
                         <div>
-                            <strong className="text-white">Start with Bubble Sort</strong>
+                            <strong className="text-foreground">Start with Bubble Sort</strong>
                             <p>It's the simplest sorting algorithm — great for understanding the basics.</p>
                         </div>
                     </div>
                     <div className="tip-item">
                         <span className="tip-num text-secondary/40">02</span>
                         <div>
-                            <strong className="text-white">Draw walls in Pathfinding</strong>
+                            <strong className="text-foreground">Draw walls in Pathfinding</strong>
                             <p>Click cells to create obstacles, then watch BFS find the shortest path.</p>
                         </div>
                     </div>
                     <div className="tip-item border-none">
                         <span className="tip-num text-accent/40">03</span>
                         <div>
-                            <strong className="text-white">Use Step mode</strong>
+                            <strong className="text-foreground">Use Step mode</strong>
                             <p>Click ⏭ to advance one step at a time for detailed analysis.</p>
                         </div>
                     </div>

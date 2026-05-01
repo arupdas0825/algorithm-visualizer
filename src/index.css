@@ -5,54 +5,75 @@
 @tailwind utilities;
 
 :root {
-  --background: 222 47% 11%;
+  --background: 222 47% 4%;
   --foreground: 210 40% 98%;
   --primary: 239 84% 67%;
   --secondary: 271 91% 65%;
   --accent: 190 95% 45%;
-  --surface: 222 47% 15%;
-  --muted: 215 20.2% 65.1%;
+  --surface: 222 47% 7%;
+  --muted: 215 20% 65%;
   --success: 142 71% 45%;
   --warning: 38 92% 50%;
   --error: 0 84% 60%;
+  --glow: 239 84% 67% / 0.15;
 }
 
 [data-theme='amoled'] {
   --background: 0 0% 0%;
-  --surface: 0 0% 5%;
+  --foreground: 0 0% 98%;
+  --primary: 217 91% 60%;
+  --secondary: 250 91% 60%;
+  --surface: 0 0% 4%;
+  --glow: 217 91% 60% / 0.2;
 }
 
 [data-theme='cyberpunk'] {
-  --background: 222 100% 6%;
-  --primary: 326 100% 50%;
+  --background: 250 100% 3%;
+  --foreground: 180 100% 90%;
+  --primary: 320 100% 50%;
   --secondary: 180 100% 50%;
   --accent: 60 100% 50%;
-  --surface: 222 100% 10%;
+  --surface: 250 100% 6%;
+  --glow: 320 100% 50% / 0.25;
 }
 
 [data-theme='neon'] {
-  --background: 261 88% 7%;
-  --primary: 317 100% 54%;
-  --secondary: 171 100% 48%;
-  --surface: 261 88% 12%;
+  --background: 260 90% 4%;
+  --foreground: 170 100% 95%;
+  --primary: 310 100% 55%;
+  --secondary: 170 100% 50%;
+  --accent: 190 100% 50%;
+  --surface: 260 90% 8%;
+  --glow: 310 100% 55% / 0.2;
 }
 
 [data-theme='light'] {
-  --background: 0 0% 100%;
+  --background: 210 40% 98%;
   --foreground: 222 47% 11%;
-  --surface: 210 40% 96%;
+  --primary: 239 84% 57%;
+  --secondary: 271 91% 55%;
+  --accent: 190 95% 35%;
+  --surface: 0 0% 100%;
   --muted: 215 16% 47%;
+  --glow: 239 84% 57% / 0.1;
 }
 
 @layer base {
+  * {
+    @apply border-white/10;
+  }
+  
+  [data-theme='light'] * {
+    @apply border-black/10;
+  }
+
   body {
-    @apply bg-background text-white font-sans antialiased selection:bg-primary/30 selection:text-white overflow-x-hidden;
-    /* Animated background gradient base */
-    background-color: #0B0D17;
-    background-image: 
-      radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%),
-      radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.15), transparent 25%);
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/30 overflow-x-hidden;
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     background-attachment: fixed;
+    background-image: 
+      radial-gradient(circle at 15% 50%, hsl(var(--primary) / 0.08), transparent 25%),
+      radial-gradient(circle at 85% 30%, hsl(var(--secondary) / 0.08), transparent 25%);
   }
 }
 
@@ -114,17 +135,19 @@
   }
   
   .glass-button {
-    @apply relative overflow-hidden bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg flex items-center justify-center gap-2 font-medium;
+    @apply relative overflow-hidden bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 hover:border-foreground/20 transition-all duration-300 backdrop-blur-md shadow-lg flex items-center justify-center gap-2 font-medium;
   }
 
   .neon-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent animate-pulse-slow;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent;
   }
 
-  .cyber-border {
-    @apply relative rounded-xl border border-transparent;
-    background: linear-gradient(to right, #1A1D2D, #1A1D2D) padding-box,
-                linear-gradient(to right, #6366f1, #a855f7) border-box;
+  .glow-theme {
+    box-shadow: 0 0 20px hsl(var(--glow)), 0 0 40px hsl(var(--glow));
+  }
+
+  .glass-theme {
+    @apply bg-surface/60 backdrop-blur-xl border border-foreground/10 shadow-xl;
   }
 }
 

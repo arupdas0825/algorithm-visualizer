@@ -33,12 +33,12 @@ export default function Grid({
                         // Base classes
                         let classes = 'w-6 h-6 border-[0.5px] border-white/5 cursor-pointer select-none transition-colors duration-200 ';
 
-                        if (isStart) classes += 'bg-accent shadow-[0_0_15px_rgba(45,212,168,0.8)] z-10 animate-pulse-slow rounded-md';
-                        else if (isEnd) classes += 'bg-error shadow-[0_0_15px_rgba(239,68,68,0.8)] z-10 animate-pulse-slow rounded-md';
-                        else if (isPath) classes += 'bg-warning shadow-[0_0_10px_rgba(251,191,36,0.6)] z-10 rounded-sm scale-90';
+                        if (isStart) classes += 'bg-accent shadow-[0_0_15px_hsl(var(--accent)/0.8)] z-10 animate-pulse-slow rounded-md';
+                        else if (isEnd) classes += 'bg-error shadow-[0_0_15px_hsl(var(--error)/0.8)] z-10 animate-pulse-slow rounded-md';
+                        else if (isPath) classes += 'bg-warning shadow-[0_0_10px_hsl(var(--warning)/0.6)] z-10 rounded-sm scale-90';
                         else if (isVisited) classes += 'bg-primary/60 hover:bg-primary/80';
                         else if (isWall) classes += 'bg-muted/80 scale-95 rounded-sm shadow-inner';
-                        else classes += 'bg-transparent hover:bg-white/10';
+                        else classes += 'bg-transparent hover:bg-foreground/10';
 
                         return (
                             <div

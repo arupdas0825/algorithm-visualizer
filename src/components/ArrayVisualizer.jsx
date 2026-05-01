@@ -26,9 +26,9 @@ export default function ArrayVisualizer({ array, highlights = {} }) {
                 else if (isComparing) bgColor = 'bg-secondary'; // Purple
 
                 let glow = '';
-                if (isSorted) glow = 'shadow-[0_0_12px_rgba(34,197,94,0.6)]';
-                else if (isSwapped) glow = 'shadow-[0_0_15px_rgba(239,68,68,0.8)]';
-                else if (isComparing) glow = 'shadow-[0_0_12px_rgba(168,85,247,0.6)]';
+                if (isSorted) glow = 'shadow-[0_0_12px_hsl(var(--success)/0.6)]';
+                else if (isSwapped) glow = 'shadow-[0_0_15px_hsl(var(--error)/0.8)]';
+                else if (isComparing) glow = 'shadow-[0_0_12px_hsl(var(--secondary)/0.6)]';
 
                 return (
                     <motion.div

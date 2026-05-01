@@ -8,15 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0B0D17', // Deep space dark
-        surface: '#1A1D2D', // Card background
-        primary: '#6366f1', // Indigo
-        secondary: '#a855f7', // Purple
-        accent: '#2dd4bf', // Teal
-        success: '#22c55e', // Green
-        warning: '#f59e0b', // Amber
-        error: '#ef4444', // Red
-        muted: '#94a3b8', // Slate gray
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        surface: 'hsl(var(--surface))',
+        primary: 'hsl(var(--primary))',
+        secondary: 'hsl(var(--secondary))',
+        accent: 'hsl(var(--accent))',
+        success: 'hsl(var(--success))',
+        warning: 'hsl(var(--warning))',
+        error: 'hsl(var(--error))',
+        muted: 'hsl(var(--muted))',
       },
       fontFamily: {
         sans: ['Inter', 'Satoshi', 'system-ui', 'sans-serif'],
