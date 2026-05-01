@@ -19,7 +19,8 @@
 
 ## 🖼️ Hero Preview
 > [!IMPORTANT]
-> **Insert Hero Screenshot Here**
+><img width="1889" height="867" alt="image" src="https://github.com/user-attachments/assets/4b50dec6-3ae2-4fd2-93d0-d415770425cd" />
+
 > *Recommended: High-resolution capture of the Dashboard in Cyberpunk or AMOLED mode.*
 
 ---
@@ -60,11 +61,17 @@ Traditional visualization tools often feel static and academic. Algomate bridges
 
 | Dashboard | Sorting |
 | :---: | :---: |
-| ![Dashboard Placeholder](https://via.placeholder.com/400x225?text=Dashboard+Screenshot+Here) | ![Sorting Placeholder](https://via.placeholder.com/400x225?text=Sorting+Visualizer+Screenshot+Here) |
+| ![Dashboard Placeholder]<img width="1880" height="855" alt="image" src="https://github.com/user-attachments/assets/bbe39198-99d1-40ee-98d6-5074d785557d" />
+ | ![Sorting Placeholder]<img width="1886" height="857" alt="image" src="https://github.com/user-attachments/assets/d7302dfb-58af-4de0-857c-58aa2b102a96" />
+ |
 | **Pathfinding** | **Data Structures** |
-| ![Pathfinding Placeholder](https://via.placeholder.com/400x225?text=Pathfinding+Screenshot+Here) | ![DS Placeholder](https://via.placeholder.com/400x225?text=Tree+Visualizer+Screenshot+Here) |
-| **Theme System** | **Mobile UI** |
-| ![Theme Placeholder](https://via.placeholder.com/400x225?text=Theme+System+Screenshot+Here) | ![Mobile Placeholder](https://via.placeholder.com/200x400?text=Mobile+UI+Screenshot+Here) |
+| ![Pathfinding Placeholder]<img width="1896" height="862" alt="image" src="https://github.com/user-attachments/assets/4708e327-158a-42ab-912c-6b88d3ec6802" />
+ | ![DS Placeholder]<img width="1905" height="850" alt="image" src="https://github.com/user-attachments/assets/68bae081-b686-4416-801c-7d21124aaed3" />
+ |
+| **Trees** | **Learning Hub** |
+| ![Trees]<img width="1892" height="850" alt="image" src="https://github.com/user-attachments/assets/05b6f85c-11ac-49e8-a179-766d2f9a2fcd" />
+ | ![Learning Hub]<img width="1876" height="867" alt="image" src="https://github.com/user-attachments/assets/76c24349-e28d-4d70-8e5a-0bc54ed3cc4e" />
+ |
 
 </div>
 
