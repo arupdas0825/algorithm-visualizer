@@ -382,6 +382,7 @@ export default function Onboarding() {
                     />
                   </div>
                 </div>
+              </div>
 
               <div className="flex gap-4">
                 <button onClick={handleBack} className="p-5 rounded-2xl border border-white/10 text-white/60 hover:bg-white/5 transition-all">
