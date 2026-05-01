@@ -9,7 +9,20 @@ export default function Layout() {
   const [isCinematic, setIsCinematic] = useState(false);
 
   return (
-    <div className="flex h-screen bg-background text-foreground transition-colors duration-500 overflow-hidden">
+    <div className="flex h-screen bg-background text-foreground transition-colors duration-500 overflow-hidden relative">
+      {/* Cinematic Neural Background Overlay */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        <motion.div 
+          animate={{ 
+            opacity: [0.1, 0.3, 0.1],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_50%)]"
+        />
+      </div>
+
       <AnimatePresence mode="wait">
         {!isCinematic && (
           <motion.div

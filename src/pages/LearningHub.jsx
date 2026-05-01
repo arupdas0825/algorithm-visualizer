@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { BookOpen, Award, Terminal, Code, Cpu, Activity, Zap, Play, CheckCircle2, ChevronRight } from 'lucide-react';
+import { BookOpen, Award, Terminal, Code, Cpu, Activity, Zap, Play, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
 
 export default function LearningHub() {
   const navigate = useNavigate();
@@ -88,8 +89,4 @@ export default function LearningHub() {
       </div>
     </div>
   );
-}
-
-function clsx(...classes) {
-  return classes.filter(Boolean).join(' ');
 }

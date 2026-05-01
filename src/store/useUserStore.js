@@ -4,22 +4,19 @@ import { persist } from 'zustand/middleware';
 export const useUserStore = create(
   persist(
     (set) => ({
-      user: null, 
-      /* 
-      user: { 
-        name: '', 
+      user: {
+        name: '',
         username: '',
         learningGoal: '',
         experienceLevel: '',
         profilePhoto: '',
         favAlgo: '',
         bio: '',
-        level: 1, 
-        xp: 0, 
+        level: 1,
+        xp: 0,
         streak: 1,
         joinedAt: ''
-      } 
-      */
+      },
       progress: {
         completedAlgorithms: [],
         timeSpent: 0, // in minutes
